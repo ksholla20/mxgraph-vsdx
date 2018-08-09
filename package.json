@@ -1,0 +1,19 @@
+{
+  "name": "mxgraph-vsdx",
+  "version": "0.0.1",
+  "description": "VSDX import support for mx graph",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "jszip": "^3.1.5",
+    "mxgraph-js": "1.0.1"
+  },
+  "keywords": [
+    "mxgraph",
+    "vsdx"
+  ],
+  "author": "sharath holla <ksholla20@gmail.com>",
+  "license": "ISC"
+}
