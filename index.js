@@ -71,14 +71,14 @@ var mxVsdxConstants = (function () {
   function mxVsdxConstants() {
   }
 
-  mxVsdxConstants.SET_VALUES_$LI$ = function () {
+  mxVsdxConstants.getSetValues = function () {
     if (mxVsdxConstants.SET_VALUES == null)
       mxVsdxConstants.SET_VALUES = ["a", "b"];
     return mxVsdxConstants.SET_VALUES;
   };
-  mxVsdxConstants.MY_SET_$LI$ = function () {
+  mxVsdxConstants.getMySet = function () {
     if (mxVsdxConstants.MY_SET == null)
-      mxVsdxConstants.MY_SET = (mxVsdxConstants.SET_VALUES_$LI$().slice(0).slice(0));
+      mxVsdxConstants.MY_SET = (mxVsdxConstants.getSetValues().slice(0).slice(0));
     return mxVsdxConstants.MY_SET;
   };
   mxVsdxConstants.ANGLE = "Angle";
@@ -248,7 +248,7 @@ var mxVsdxCodec = (function () {
     this.vsdxModel = null;
   }
 
-  mxVsdxCodec.vsdxPlaceholder_$LI$ = function () {
+  mxVsdxCodec.getVsdxPlaceholder = function () {
     if (mxVsdxCodec.vsdxPlaceholder == null) {
       var tmp = "dmlzaW8=";
       mxVsdxCodec.vsdxPlaceholder = (window.atob) ? atob(tmp) : Base64.decode(tmp, true);
@@ -257,7 +257,7 @@ var mxVsdxCodec = (function () {
     return mxVsdxCodec.vsdxPlaceholder;
   };
 
-  mxVsdxCodec.parsererrorNS_$LI$ = function () {
+  mxVsdxCodec.getParsererrorNS = function () {
     if (mxVsdxCodec.parsererrorNS == null) {
       mxVsdxCodec.parsererrorNS = "";
 
@@ -2206,7 +2206,7 @@ var mxVsdxUtils = (function () {
   function mxVsdxUtils() {
   }
 
-  mxVsdxUtils.conversionFactor_$LI$ = function () {
+  mxVsdxUtils.getConversionFactor = function () {
     if (mxVsdxUtils.conversionFactor == null)
       mxVsdxUtils.conversionFactor = mxVsdxUtils.screenCoordinatesPerCm * mxVsdxUtils.CENTIMETERS_PER_INCHES;
     return mxVsdxUtils.conversionFactor;
@@ -2266,7 +2266,7 @@ var mxVsdxUtils = (function () {
     ;
     return null;
   };
-  mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String$int = function (elem, attName, defVal) {
+  mxVsdxUtils.getIntAttrFromInt = function (elem, attName, defVal) {
     try {
       var val = elem.getAttribute(attName);
       if (val != null) {
@@ -2287,16 +2287,16 @@ var mxVsdxUtils = (function () {
    */
   mxVsdxUtils.getIntAttr = function (elem, attName, defVal) {
     if (((elem != null && (elem.nodeType == 1)) || elem === null) && ((typeof attName === 'string') || attName === null) && ((typeof defVal === 'number') || defVal === null)) {
-      return mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String$int(elem, attName, defVal);
+      return mxVsdxUtils.getIntAttrFromInt(elem, attName, defVal);
     }
     else if (((elem != null && (elem.nodeType == 1)) || elem === null) && ((typeof attName === 'string') || attName === null) && defVal === undefined) {
-      return mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(elem, attName);
+      return mxVsdxUtils.getIntAttrFromString(elem, attName);
     }
     else
       throw new Error('invalid overload');
   };
-  mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String = function (elem, attName) {
-    return mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String$int(elem, attName, 0);
+  mxVsdxUtils.getIntAttrFromString = function (elem, attName) {
+    return mxVsdxUtils.getIntAttrFromInt(elem, attName, 0);
   };
   /**
    * Returns the string that represents the content of a given style map.
@@ -2499,21 +2499,21 @@ var mxBase64 = (function () {
   function mxBase64() {
   }
 
-  mxBase64.__static_initialize = function () {
-    if (!mxBase64.__static_initialized) {
-      mxBase64.__static_initialized = true;
-      mxBase64.__static_initializer_0();
+  mxBase64.initialize = function () {
+    if (!mxBase64.initialized) {
+      mxBase64.initialized = true;
+      mxBase64.initializer_0();
     }
   };
-  mxBase64.CA_$LI$ = function () {
-    mxBase64.__static_initialize();
+  mxBase64.getCA = function () {
+    mxBase64.initialize();
     if (mxBase64.CA == null)
       mxBase64.CA = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/").split('');
     return mxBase64.CA;
   };
   ;
-  mxBase64.IA_$LI$ = function () {
-    mxBase64.__static_initialize();
+  mxBase64.getIA = function () {
+    mxBase64.initialize();
     if (mxBase64.IA == null)
       mxBase64.IA = (function (s) {
         var a = [];
@@ -2524,15 +2524,15 @@ var mxBase64 = (function () {
     return mxBase64.IA;
   };
   ;
-  mxBase64.__static_initializer_0 = function () {
+  mxBase64.initializer_0 = function () {
     /* fill */
     (function (a, v) {
       for (var i = 0; i < a.length; i++)
         a[i] = v;
-    })(mxBase64.IA_$LI$(), -1);
-    for (var i = 0, iS = mxBase64.CA_$LI$().length; i < iS; i++)
-      mxBase64.IA_$LI$()[(mxBase64.CA_$LI$()[i]).charCodeAt(0)] = i;
-    mxBase64.IA_$LI$()[('=').charCodeAt(0)] = 0;
+    })(mxBase64.getIA(), -1);
+    for (var i = 0, iS = mxBase64.getCA().length; i < iS; i++)
+      mxBase64.getIA()[(mxBase64.getCA()[i]).charCodeAt(0)] = i;
+    mxBase64.getIA()[('=').charCodeAt(0)] = 0;
   };
   /**
    * Encodes a raw byte array into a BASE64 <code>char[]</code> representation i accordance with RFC 2045.
@@ -2552,10 +2552,10 @@ var mxBase64 = (function () {
     var dArr = new Array(dLen);
     for (var s = start, d = 0, cc = 0; s < eLen + start;) {
       var i = (sArr[s++] & 255) << 16 | (sArr[s++] & 255) << 8 | (sArr[s++] & 255);
-      dArr[d++] = mxBase64.CA_$LI$()[(i >>> 18) & 63];
-      dArr[d++] = mxBase64.CA_$LI$()[(i >>> 12) & 63];
-      dArr[d++] = mxBase64.CA_$LI$()[(i >>> 6) & 63];
-      dArr[d++] = mxBase64.CA_$LI$()[i & 63];
+      dArr[d++] = mxBase64.getCA()[(i >>> 18) & 63];
+      dArr[d++] = mxBase64.getCA()[(i >>> 12) & 63];
+      dArr[d++] = mxBase64.getCA()[(i >>> 6) & 63];
+      dArr[d++] = mxBase64.getCA()[i & 63];
       if (lineSep && ++cc === 19 && d < dLen - 2) {
         dArr[d++] = '\r';
         dArr[d++] = '\n';
@@ -2566,26 +2566,26 @@ var mxBase64 = (function () {
     var left = sLen - eLen;
     if (left > 0) {
       var i = ((sArr[eLen + start] & 255) << 10) | (left === 2 ? ((sArr[sLen + start - 1] & 255) << 2) : 0);
-      dArr[dLen - 4] = mxBase64.CA_$LI$()[i >> 12];
-      dArr[dLen - 3] = mxBase64.CA_$LI$()[(i >>> 6) & 63];
-      dArr[dLen - 2] = left === 2 ? mxBase64.CA_$LI$()[i & 63] : '=';
+      dArr[dLen - 4] = mxBase64.getCA()[i >> 12];
+      dArr[dLen - 3] = mxBase64.getCA()[(i >>> 6) & 63];
+      dArr[dLen - 2] = left === 2 ? mxBase64.getCA()[i & 63] : '=';
       dArr[dLen - 1] = '=';
     }
     return dArr;
   };
-  mxBase64.decode$char_A = function (sArr) {
+  mxBase64.decodeChar = function (sArr) {
     var sLen = sArr != null ? sArr.length : 0;
     if (sLen === 0)
       return [];
     var sepCnt = 0;
     for (var i = 0; i < sLen; i++)
-      if (mxBase64.IA_$LI$()[(sArr[i]).charCodeAt(0)] < 0)
+      if (mxBase64.getIA()[(sArr[i]).charCodeAt(0)] < 0)
         sepCnt++;
     ;
     if ((sLen - sepCnt) % 4 !== 0)
       return null;
     var pad = 0;
-    for (var i = sLen; i > 1 && mxBase64.IA_$LI$()[(sArr[--i]).charCodeAt(0)] <= 0;)
+    for (var i = sLen; i > 1 && mxBase64.getIA()[(sArr[--i]).charCodeAt(0)] <= 0;)
       if ((function (c) {
           return c.charCodeAt == null ? c : c.charCodeAt(0);
         })(sArr[i]) == '='.charCodeAt(0))
@@ -2601,7 +2601,7 @@ var mxBase64 = (function () {
     for (var s = 0, d = 0; d < len;) {
       var i = 0;
       for (var j = 0; j < 4; j++) {
-        var c = mxBase64.IA_$LI$()[(sArr[s++]).charCodeAt(0)];
+        var c = mxBase64.getIA()[(sArr[s++]).charCodeAt(0)];
         if (c >= 0)
           i |= c << (18 - j * 6);
         else
@@ -2627,26 +2627,26 @@ var mxBase64 = (function () {
    */
   mxBase64.decode = function (sArr) {
     if (((sArr != null && sArr instanceof Array && (sArr.length == 0 || sArr[0] == null || (typeof sArr[0] === 'string'))) || sArr === null)) {
-      return mxBase64.decode$char_A(sArr);
+      return mxBase64.decodeChar(sArr);
     }
     else if (((sArr != null && sArr instanceof Array && (sArr.length == 0 || sArr[0] == null || (typeof sArr[0] === 'number'))) || sArr === null)) {
-      return mxBase64.decode$byte_A(sArr);
+      return mxBase64.decodeByte(sArr);
     }
     else if (((typeof sArr === 'string') || sArr === null)) {
-      return mxBase64.decode$java_lang_String(sArr);
+      return mxBase64.decodeString(sArr);
     }
     else
       throw new Error('invalid overload');
   };
-  mxBase64.decodeFast$char_A = function (sArr) {
+  mxBase64.decodeFastChar = function (sArr) {
     var sLen = sArr.length;
     if (sLen === 0)
       return [];
     var sIx = 0;
     var eIx = sLen - 1;
-    while ((sIx < eIx && mxBase64.IA_$LI$()[(sArr[sIx]).charCodeAt(0)] < 0))
+    while ((sIx < eIx && mxBase64.getIA()[(sArr[sIx]).charCodeAt(0)] < 0))
       sIx++;
-    while ((eIx > 0 && mxBase64.IA_$LI$()[(sArr[eIx]).charCodeAt(0)] < 0))
+    while ((eIx > 0 && mxBase64.getIA()[(sArr[eIx]).charCodeAt(0)] < 0))
       eIx--;
     var pad = (function (c) {
       return c.charCodeAt == null ? c : c.charCodeAt(0);
@@ -2666,7 +2666,7 @@ var mxBase64 = (function () {
     })(len);
     var d = 0;
     for (var cc = 0, eLen = ((len / 3 | 0)) * 3; d < eLen;) {
-      var i = mxBase64.IA_$LI$()[(sArr[sIx++]).charCodeAt(0)] << 18 | mxBase64.IA_$LI$()[(sArr[sIx++]).charCodeAt(0)] << 12 | mxBase64.IA_$LI$()[(sArr[sIx++]).charCodeAt(0)] << 6 | mxBase64.IA_$LI$()[(sArr[sIx++]).charCodeAt(0)];
+      var i = mxBase64.getIA()[(sArr[sIx++]).charCodeAt(0)] << 18 | mxBase64.getIA()[(sArr[sIx++]).charCodeAt(0)] << 12 | mxBase64.getIA()[(sArr[sIx++]).charCodeAt(0)] << 6 | mxBase64.getIA()[(sArr[sIx++]).charCodeAt(0)];
       dArr[d++] = ((i >> 16) | 0);
       dArr[d++] = ((i >> 8) | 0);
       dArr[d++] = (i | 0);
@@ -2679,7 +2679,7 @@ var mxBase64 = (function () {
     if (d < len) {
       var i = 0;
       for (var j = 0; sIx <= eIx - pad; j++)
-        i |= mxBase64.IA_$LI$()[(sArr[sIx++]).charCodeAt(0)] << (18 - j * 6);
+        i |= mxBase64.getIA()[(sArr[sIx++]).charCodeAt(0)] << (18 - j * 6);
       for (var r = 16; d < len; r -= 8)
         dArr[d++] = ((i >> r) | 0);
     }
@@ -2697,13 +2697,13 @@ var mxBase64 = (function () {
    */
   mxBase64.decodeFast = function (sArr) {
     if (((sArr != null && sArr instanceof Array && (sArr.length == 0 || sArr[0] == null || (typeof sArr[0] === 'string'))) || sArr === null)) {
-      return mxBase64.decodeFast$char_A(sArr);
+      return mxBase64.decodeFastChar(sArr);
     }
     else if (((sArr != null && sArr instanceof Array && (sArr.length == 0 || sArr[0] == null || (typeof sArr[0] === 'number'))) || sArr === null)) {
-      return mxBase64.decodeFast$byte_A(sArr);
+      return mxBase64.decodeFastByte(sArr);
     }
     else if (((typeof sArr === 'string') || sArr === null)) {
-      return mxBase64.decodeFast$java_lang_String(sArr);
+      return mxBase64.decodeFastString(sArr);
     }
     else
       throw new Error('invalid overload');
@@ -2731,10 +2731,10 @@ var mxBase64 = (function () {
     })(dLen);
     for (var s = 0, d = 0, cc = 0; s < eLen;) {
       var i = (sArr[s++] & 255) << 16 | (sArr[s++] & 255) << 8 | (sArr[s++] & 255);
-      dArr[d++] = (mxBase64.CA_$LI$()[(i >>> 18) & 63]).charCodeAt(0);
-      dArr[d++] = (mxBase64.CA_$LI$()[(i >>> 12) & 63]).charCodeAt(0);
-      dArr[d++] = (mxBase64.CA_$LI$()[(i >>> 6) & 63]).charCodeAt(0);
-      dArr[d++] = (mxBase64.CA_$LI$()[i & 63]).charCodeAt(0);
+      dArr[d++] = (mxBase64.getCA()[(i >>> 18) & 63]).charCodeAt(0);
+      dArr[d++] = (mxBase64.getCA()[(i >>> 12) & 63]).charCodeAt(0);
+      dArr[d++] = (mxBase64.getCA()[(i >>> 6) & 63]).charCodeAt(0);
+      dArr[d++] = (mxBase64.getCA()[i & 63]).charCodeAt(0);
       if (lineSep && ++cc === 19 && d < dLen - 2) {
         dArr[d++] = ('\r').charCodeAt(0);
         dArr[d++] = ('\n').charCodeAt(0);
@@ -2745,24 +2745,24 @@ var mxBase64 = (function () {
     var left = sLen - eLen;
     if (left > 0) {
       var i = ((sArr[eLen] & 255) << 10) | (left === 2 ? ((sArr[sLen - 1] & 255) << 2) : 0);
-      dArr[dLen - 4] = (mxBase64.CA_$LI$()[i >> 12]).charCodeAt(0);
-      dArr[dLen - 3] = (mxBase64.CA_$LI$()[(i >>> 6) & 63]).charCodeAt(0);
-      dArr[dLen - 2] = left === 2 ? (mxBase64.CA_$LI$()[i & 63]).charCodeAt(0) : ('=').charCodeAt(0);
+      dArr[dLen - 4] = (mxBase64.getCA()[i >> 12]).charCodeAt(0);
+      dArr[dLen - 3] = (mxBase64.getCA()[(i >>> 6) & 63]).charCodeAt(0);
+      dArr[dLen - 2] = left === 2 ? (mxBase64.getCA()[i & 63]).charCodeAt(0) : ('=').charCodeAt(0);
       dArr[dLen - 1] = ('=').charCodeAt(0);
     }
     return dArr;
   };
-  mxBase64.decode$byte_A = function (sArr) {
+  mxBase64.decodeByte = function (sArr) {
     var sLen = sArr.length;
     var sepCnt = 0;
     for (var i = 0; i < sLen; i++)
-      if (mxBase64.IA_$LI$()[sArr[i] & 255] < 0)
+      if (mxBase64.getIA()[sArr[i] & 255] < 0)
         sepCnt++;
     ;
     if ((sLen - sepCnt) % 4 !== 0)
       return null;
     var pad = 0;
-    for (var i = sLen; i > 1 && mxBase64.IA_$LI$()[sArr[--i] & 255] <= 0;)
+    for (var i = sLen; i > 1 && mxBase64.getIA()[sArr[--i] & 255] <= 0;)
       if (sArr[i] == '='.charCodeAt(0))
         pad++;
     ;
@@ -2776,7 +2776,7 @@ var mxBase64 = (function () {
     for (var s = 0, d = 0; d < len;) {
       var i = 0;
       for (var j = 0; j < 4; j++) {
-        var c = mxBase64.IA_$LI$()[sArr[s++] & 255];
+        var c = mxBase64.getIA()[sArr[s++] & 255];
         if (c >= 0)
           i |= c << (18 - j * 6);
         else
@@ -2793,15 +2793,15 @@ var mxBase64 = (function () {
     ;
     return dArr;
   };
-  mxBase64.decodeFast$byte_A = function (sArr) {
+  mxBase64.decodeFastByte = function (sArr) {
     var sLen = sArr.length;
     if (sLen === 0)
       return [];
     var sIx = 0;
     var eIx = sLen - 1;
-    while ((sIx < eIx && mxBase64.IA_$LI$()[sArr[sIx] & 255] < 0))
+    while ((sIx < eIx && mxBase64.getIA()[sArr[sIx] & 255] < 0))
       sIx++;
-    while ((eIx > 0 && mxBase64.IA_$LI$()[sArr[eIx] & 255] < 0))
+    while ((eIx > 0 && mxBase64.getIA()[sArr[eIx] & 255] < 0))
       eIx--;
     var pad = sArr[eIx] == '='.charCodeAt(0) ? (sArr[eIx - 1] == '='.charCodeAt(0) ? 2 : 1) : 0;
     var cCnt = eIx - sIx + 1;
@@ -2815,7 +2815,7 @@ var mxBase64 = (function () {
     })(len);
     var d = 0;
     for (var cc = 0, eLen = ((len / 3 | 0)) * 3; d < eLen;) {
-      var i = mxBase64.IA_$LI$()[sArr[sIx++]] << 18 | mxBase64.IA_$LI$()[sArr[sIx++]] << 12 | mxBase64.IA_$LI$()[sArr[sIx++]] << 6 | mxBase64.IA_$LI$()[sArr[sIx++]];
+      var i = mxBase64.getIA()[sArr[sIx++]] << 18 | mxBase64.getIA()[sArr[sIx++]] << 12 | mxBase64.getIA()[sArr[sIx++]] << 6 | mxBase64.getIA()[sArr[sIx++]];
       dArr[d++] = ((i >> 16) | 0);
       dArr[d++] = ((i >> 8) | 0);
       dArr[d++] = (i | 0);
@@ -2828,7 +2828,7 @@ var mxBase64 = (function () {
     if (d < len) {
       var i = 0;
       for (var j = 0; sIx <= eIx - pad; j++)
-        i |= mxBase64.IA_$LI$()[sArr[sIx++]] << (18 - j * 6);
+        i |= mxBase64.getIA()[sArr[sIx++]] << (18 - j * 6);
       for (var r = 16; d < len; r -= 8)
         dArr[d++] = ((i >> r) | 0);
     }
@@ -2845,19 +2845,19 @@ var mxBase64 = (function () {
   mxBase64.encodeToString = function (sArr, start, lineSep) {
     return mxBase64.encodeToChar(sArr, start, lineSep).join('');
   };
-  mxBase64.decode$java_lang_String = function (str) {
+  mxBase64.decodeString = function (str) {
     var sLen = str != null ? str.length : 0;
     if (sLen === 0)
       return [];
     var sepCnt = 0;
     for (var i = 0; i < sLen; i++)
-      if (mxBase64.IA_$LI$()[(str.charAt(i)).charCodeAt(0)] < 0)
+      if (mxBase64.getIA()[(str.charAt(i)).charCodeAt(0)] < 0)
         sepCnt++;
     ;
     if ((sLen - sepCnt) % 4 !== 0)
       return null;
     var pad = 0;
-    for (var i = sLen; i > 1 && mxBase64.IA_$LI$()[(str.charAt(--i)).charCodeAt(0)] <= 0;)
+    for (var i = sLen; i > 1 && mxBase64.getIA()[(str.charAt(--i)).charCodeAt(0)] <= 0;)
       if ((function (c) {
           return c.charCodeAt == null ? c : c.charCodeAt(0);
         })(str.charAt(i)) == '='.charCodeAt(0))
@@ -2873,7 +2873,7 @@ var mxBase64 = (function () {
     for (var s = 0, d = 0; d < len;) {
       var i = 0;
       for (var j = 0; j < 4; j++) {
-        var c = mxBase64.IA_$LI$()[(str.charAt(s++)).charCodeAt(0)];
+        var c = mxBase64.getIA()[(str.charAt(s++)).charCodeAt(0)];
         if (c >= 0)
           i |= c << (18 - j * 6);
         else
@@ -2890,17 +2890,17 @@ var mxBase64 = (function () {
     ;
     return dArr;
   };
-  mxBase64.decodeFast$java_lang_String = function (s) {
+  mxBase64.decodeFastString = function (s) {
     var sLen = s.length;
     if (sLen === 0)
       return [];
     var sIx = 0;
     var eIx = sLen - 1;
-    while ((sIx < eIx && mxBase64.IA_$LI$()[(function (c) {
+    while ((sIx < eIx && mxBase64.getIA()[(function (c) {
       return c.charCodeAt == null ? c : c.charCodeAt(0);
     })(s.charAt(sIx)) & 255] < 0))
       sIx++;
-    while ((eIx > 0 && mxBase64.IA_$LI$()[(function (c) {
+    while ((eIx > 0 && mxBase64.getIA()[(function (c) {
       return c.charCodeAt == null ? c : c.charCodeAt(0);
     })(s.charAt(eIx)) & 255] < 0))
       eIx--;
@@ -2922,7 +2922,7 @@ var mxBase64 = (function () {
     })(len);
     var d = 0;
     for (var cc = 0, eLen = ((len / 3 | 0)) * 3; d < eLen;) {
-      var i = mxBase64.IA_$LI$()[(s.charAt(sIx++)).charCodeAt(0)] << 18 | mxBase64.IA_$LI$()[(s.charAt(sIx++)).charCodeAt(0)] << 12 | mxBase64.IA_$LI$()[(s.charAt(sIx++)).charCodeAt(0)] << 6 | mxBase64.IA_$LI$()[(s.charAt(sIx++)).charCodeAt(0)];
+      var i = mxBase64.getIA()[(s.charAt(sIx++)).charCodeAt(0)] << 18 | mxBase64.getIA()[(s.charAt(sIx++)).charCodeAt(0)] << 12 | mxBase64.getIA()[(s.charAt(sIx++)).charCodeAt(0)] << 6 | mxBase64.getIA()[(s.charAt(sIx++)).charCodeAt(0)];
       dArr[d++] = ((i >> 16) | 0);
       dArr[d++] = ((i >> 8) | 0);
       dArr[d++] = (i | 0);
@@ -2935,13 +2935,13 @@ var mxBase64 = (function () {
     if (d < len) {
       var i = 0;
       for (var j = 0; sIx <= eIx - pad; j++)
-        i |= mxBase64.IA_$LI$()[(s.charAt(sIx++)).charCodeAt(0)] << (18 - j * 6);
+        i |= mxBase64.getIA()[(s.charAt(sIx++)).charCodeAt(0)] << (18 - j * 6);
       for (var r = 16; d < len; r -= 8)
         dArr[d++] = ((i >> r) | 0);
     }
     return dArr;
   };
-  mxBase64.__static_initialized = false;
+  mxBase64.initialized = false;
   return mxBase64;
 }());
 
@@ -3010,79 +3010,79 @@ var Style = (function () {
     this.stylesheetRefs(model);
   }
 
-  Style.__static_initialize = function () {
-    if (!Style.__static_initialized) {
-      Style.__static_initialized = true;
-      Style.__static_initializer_0();
-      Style.__static_initializer_1();
+  Style.initialize = function () {
+    if (!Style.initialized) {
+      Style.initialized = true;
+      Style.initializer_0();
+      Style.initializer_1();
     }
   };
-  Style.styleTypes_$LI$ = function () {
-    Style.__static_initialize();
+  Style.getStyleTypes = function () {
+    Style.initialize();
     if (Style.styleTypes == null)
       Style.styleTypes = ({});
     return Style.styleTypes;
   };
   ;
-  Style.__static_initializer_0 = function () {
+  Style.initializer_0 = function () {
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.FILL] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.FILL] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.FILL_BKGND] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.FILL_BKGND] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.FILL_BKGND_TRANS] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.FILL_BKGND_TRANS] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.FILL_FOREGND] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.FILL_FOREGND] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.FILL_FOREGND_TRANS] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.FILL_FOREGND_TRANS] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.FILL_PATTERN] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.FILL_PATTERN] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.SHDW_PATTERN] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.SHDW_PATTERN] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.FILL_STYLE] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.FILL_STYLE] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()["QuickStyleFillColor"] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()["QuickStyleFillColor"] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()["QuickStyleFillMatrix"] = mxVsdxConstants.FILL_STYLE);
+    (Style.getStyleTypes()["QuickStyleFillMatrix"] = mxVsdxConstants.FILL_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.BEGIN_ARROW] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.BEGIN_ARROW] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.END_ARROW] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.END_ARROW] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.LINE_PATTERN] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.LINE_PATTERN] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.LINE_COLOR] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.LINE_COLOR] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.LINE_COLOR_TRANS] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.LINE_COLOR_TRANS] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.LINE_WEIGHT] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.LINE_WEIGHT] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()["QuickStyleLineColor"] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()["QuickStyleLineColor"] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()["QuickStyleLineMatrix"] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()["QuickStyleLineMatrix"] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.BEGIN_ARROW_SIZE] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.BEGIN_ARROW_SIZE] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.END_ARROW_SIZE] = mxVsdxConstants.LINE_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.END_ARROW_SIZE] = mxVsdxConstants.LINE_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.TEXT_BKGND] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.TEXT_BKGND] = mxVsdxConstants.TEXT_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.BOTTOM_MARGIN] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.BOTTOM_MARGIN] = mxVsdxConstants.TEXT_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.LEFT_MARGIN] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.LEFT_MARGIN] = mxVsdxConstants.TEXT_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.RIGHT_MARGIN] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.RIGHT_MARGIN] = mxVsdxConstants.TEXT_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.TOP_MARGIN] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.TOP_MARGIN] = mxVsdxConstants.TEXT_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.PARAGRAPH] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.PARAGRAPH] = mxVsdxConstants.TEXT_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()[mxVsdxConstants.CHARACTER] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()[mxVsdxConstants.CHARACTER] = mxVsdxConstants.TEXT_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()["QuickStyleFontColor"] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()["QuickStyleFontColor"] = mxVsdxConstants.TEXT_STYLE);
     /* put */
-    (Style.styleTypes_$LI$()["QuickStyleFontMatrix"] = mxVsdxConstants.TEXT_STYLE);
+    (Style.getStyleTypes()["QuickStyleFontMatrix"] = mxVsdxConstants.TEXT_STYLE);
   };
   Style.prototype.getTheme = function () {
     return null;
@@ -3220,7 +3220,7 @@ var Style = (function () {
                 return o1 === o2;
               }
             })(units, "PT")) {
-            parsedValue = parsedValue * mxVsdxUtils.conversionFactor_$LI$();
+            parsedValue = parsedValue * mxVsdxUtils.getConversionFactor();
           }
           return Math.round(parsedValue * 100.0) / 100.0;
         }
@@ -3232,13 +3232,13 @@ var Style = (function () {
     }
     return defaultValue;
   };
-  Style.prototype.getScreenNumericalValue$org_w3c_dom_Element$double = function (cell, defaultValue) {
+  Style.prototype.getScreenNumericalValueDefault = function (cell, defaultValue) {
     if (cell != null) {
       var value = cell.getAttribute("V");
       if (value != null) {
         try {
           var parsedValue = parseFloat(value);
-          return this.getScreenNumericalValue$double(parsedValue);
+          return this.getScreenNumericalValueDouble(parsedValue);
         }
         catch (e) {
           console.error(e.message, e);
@@ -3257,16 +3257,16 @@ var Style = (function () {
    */
   Style.prototype.getScreenNumericalValue = function (cell, defaultValue) {
     if (((cell != null && (cell.nodeType == 1)) || cell === null) && ((typeof defaultValue === 'number') || defaultValue === null)) {
-      return this.getScreenNumericalValue$org_w3c_dom_Element$double(cell, defaultValue);
+      return this.getScreenNumericalValueDefault(cell, defaultValue);
     }
     else if (((typeof cell === 'number') || cell === null) && defaultValue === undefined) {
-      return this.getScreenNumericalValue$double(cell);
+      return this.getScreenNumericalValueDouble(cell);
     }
     else
       throw new Error('invalid overload');
   };
-  Style.prototype.getScreenNumericalValue$double = function (val) {
-    var conVal = val * mxVsdxUtils.conversionFactor_$LI$();
+  Style.prototype.getScreenNumericalValueDouble = function (val) {
+    var conVal = val * mxVsdxUtils.getConversionFactor();
     return conVal;
   };
   /**
@@ -3327,7 +3327,7 @@ var Style = (function () {
     ;
     return result;
   };
-  Style.prototype.getCellElement$java_lang_String$java_lang_String$java_lang_String = function (cellKey, index, sectKey) {
+  Style.prototype.getCellElement3Args = function (cellKey, index, sectKey) {
     var sect = (function (m, k) {
       return m[k] ? m[k] : null;
     })(this.sections, sectKey);
@@ -3381,7 +3381,7 @@ var Style = (function () {
               }
             })(mxVsdxConstants.COLOR, cellKey))
             return elem;
-          var themeElem = this.style.getCellElement$java_lang_String$java_lang_String$java_lang_String(cellKey, index, sectKey);
+          var themeElem = this.style.getCellElement3Args(cellKey, index, sectKey);
           if (themeElem != null) {
             return themeElem;
           }
@@ -3391,12 +3391,12 @@ var Style = (function () {
     if (elem == null || inherit) {
       var styleType = (function (m, k) {
         return m[k] ? m[k] : null;
-      })(Style.styleTypes_$LI$(), sectKey);
+      })(Style.getStyleTypes(), sectKey);
       var parentStyle = (function (m, k) {
         return m[k] ? m[k] : null;
       })(this.styleParents, styleType);
       if (parentStyle != null) {
-        var parentElem = parentStyle.getCellElement$java_lang_String$java_lang_String$java_lang_String(cellKey, index, sectKey);
+        var parentElem = parentStyle.getCellElement3Args(cellKey, index, sectKey);
         if (parentElem != null) {
           return parentElem;
         }
@@ -3406,15 +3406,15 @@ var Style = (function () {
   };
   Style.prototype.getCellElement = function (cellKey, index, sectKey) {
     if (((typeof cellKey === 'string') || cellKey === null) && ((typeof index === 'string') || index === null) && ((typeof sectKey === 'string') || sectKey === null)) {
-      return this.getCellElement$java_lang_String$java_lang_String$java_lang_String(cellKey, index, sectKey);
+      return this.getCellElement3Args(cellKey, index, sectKey);
     }
     else if (((typeof cellKey === 'string') || cellKey === null) && index === undefined && sectKey === undefined) {
-      return this.getCellElement$java_lang_String(cellKey);
+      return this.getCellElement1Args(cellKey);
     }
     else
       throw new Error('invalid overload');
   };
-  Style.prototype.getCellElement$java_lang_String = function (key) {
+  Style.prototype.getCellElement1Args = function (key) {
     var elem = (function (m, k) {
       return m[k] ? m[k] : null;
     })(this.cellElements, key);
@@ -3506,7 +3506,7 @@ var Style = (function () {
               }
             })(mxVsdxConstants.LINE_WEIGHT, key))
             return elem;
-          var themeElem = this.style.getCellElement$java_lang_String(key);
+          var themeElem = this.style.getCellElement1Args(key);
           if (themeElem != null) {
             return themeElem;
           }
@@ -3516,12 +3516,12 @@ var Style = (function () {
     if (elem == null || inherit) {
       var styleType = (function (m, k) {
         return m[k] ? m[k] : null;
-      })(Style.styleTypes_$LI$(), key);
+      })(Style.getStyleTypes(), key);
       var parentStyle = (function (m, k) {
         return m[k] ? m[k] : null;
       })(this.styleParents, styleType);
       if (parentStyle != null) {
-        var parentElem = parentStyle.getCellElement$java_lang_String(key);
+        var parentElem = parentStyle.getCellElement1Args(key);
         if (parentElem != null) {
           return parentElem;
         }
@@ -3543,11 +3543,11 @@ var Style = (function () {
         else {
           return o1 === o2;
         }
-      })(this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.LINE_PATTERN), "1"), "0")) {
+      })(this.getValue(this.getCellElement1Args(mxVsdxConstants.LINE_PATTERN), "1"), "0")) {
       color = "none";
     }
     else {
-      color = this.getColor(this.getCellElement$java_lang_String(mxVsdxConstants.LINE_COLOR));
+      color = this.getColor(this.getCellElement1Args(mxVsdxConstants.LINE_COLOR));
       if ((function (o1, o2) {
           if (o1 && o1.equals) {
             return o1.equals(o2);
@@ -3558,7 +3558,7 @@ var Style = (function () {
         })("Themed", color)) {
         var theme_7 = this.getTheme();
         if (theme_7 != null) {
-          var colorObj = this.isVertex() ? theme_7.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(this.getQuickStyleVals()) : theme_7.getConnLineColor(this.getQuickStyleVals());
+          var colorObj = this.isVertex() ? theme_7.getLineColorQuickStyleVals(this.getQuickStyleVals()) : theme_7.getConnLineColor(this.getQuickStyleVals());
           color = colorObj.toHexStr();
         }
         else {
@@ -3577,7 +3577,7 @@ var Style = (function () {
    * @return {string} hexadecimal representation of the color.
    */
   Style.prototype.getFillColor = function () {
-    var fillGradientEnabled = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.FILL_GRADIENT_ENABLED), "0");
+    var fillGradientEnabled = this.getValue(this.getCellElement1Args(mxVsdxConstants.FILL_GRADIENT_ENABLED), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -3595,7 +3595,7 @@ var Style = (function () {
           return color;
       }
     }
-    var fillForeColor = this.getColor(this.getCellElement$java_lang_String(mxVsdxConstants.FILL_FOREGND));
+    var fillForeColor = this.getColor(this.getCellElement1Args(mxVsdxConstants.FILL_FOREGND));
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -3606,14 +3606,14 @@ var Style = (function () {
       })("Themed", fillForeColor)) {
       var theme_8 = this.getTheme();
       if (theme_8 != null) {
-        var color = theme_8.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(this.getQuickStyleVals());
+        var color = theme_8.getFillColorQuickStyleVals(this.getQuickStyleVals());
         fillForeColor = color.toHexStr();
       }
       else {
         fillForeColor = "#FFFFFF";
       }
     }
-    var fillPattern = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.FILL_PATTERN), "0");
+    var fillPattern = this.getValue(this.getCellElement1Args(mxVsdxConstants.FILL_PATTERN), "0");
     if (fillPattern != null && (function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -3689,14 +3689,14 @@ var Style = (function () {
    * @return {number} Numerical value of the LineWeight element.
    */
   Style.prototype.getLineWeight = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.LINE_WEIGHT), 0);
+    return this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.LINE_WEIGHT), 0);
   };
   /**
    * Returns the level of transparency of the Shape.
    * @return {number} double in range (opaque = 0)..(100 = transparent)
    */
   Style.prototype.getStrokeTransparency = function () {
-    return this.getValueAsDouble(this.getCellElement$java_lang_String(mxVsdxConstants.LINE_COLOR_TRANS), 0);
+    return this.getValueAsDouble(this.getCellElement1Args(mxVsdxConstants.LINE_COLOR_TRANS), 0);
   };
   /**
    * Returns the NameU attribute.
@@ -3733,7 +3733,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getTextColor = function (index) {
-    var colorElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.COLOR, index, mxVsdxConstants.CHARACTER);
+    var colorElem = this.getCellElement3Args(mxVsdxConstants.COLOR, index, mxVsdxConstants.CHARACTER);
     var color = this.getValue(colorElem, "#000000");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
@@ -3745,7 +3745,7 @@ var Style = (function () {
       })("Themed", color)) {
       var theme_9 = this.getTheme();
       if (theme_9 != null) {
-        var colorObj = this.isVertex() ? theme_9.getFontColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(this.getQuickStyleVals()) : theme_9.getConnFontColor(this.getQuickStyleVals());
+        var colorObj = this.isVertex() ? theme_9.getFontColorQuickStyleVals(this.getQuickStyleVals()) : theme_9.getConnFontColor(this.getQuickStyleVals());
         color = colorObj.toHexStr();
       }
       else {
@@ -3767,28 +3767,28 @@ var Style = (function () {
    * @return {number} Numerical value of the TopMargin element
    */
   Style.prototype.getTextTopMargin = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.TOP_MARGIN), 0);
+    return this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.TOP_MARGIN), 0);
   };
   /**
    * Returns the bottom margin of text in pixels.
    * @return {number} Numerical value of the BottomMargin element.
    */
   Style.prototype.getTextBottomMargin = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.BOTTOM_MARGIN), 0);
+    return this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.BOTTOM_MARGIN), 0);
   };
   /**
    * Returns the left margin of text in pixels.
    * @return {number} Numerical value of the LeftMargin element.
    */
   Style.prototype.getTextLeftMargin = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.LEFT_MARGIN), 0);
+    return this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.LEFT_MARGIN), 0);
   };
   /**
    * Returns the right margin of text in pixels.
    * @return {number} Numerical value of the RightMargin element.
    */
   Style.prototype.getTextRightMargin = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.RIGHT_MARGIN), 0);
+    return this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.RIGHT_MARGIN), 0);
   };
   /**
    * Returns the style of one text fragment.
@@ -3797,7 +3797,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getTextStyle = function (index) {
-    var styleElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.STYLE, index, mxVsdxConstants.CHARACTER);
+    var styleElem = this.getCellElement3Args(mxVsdxConstants.STYLE, index, mxVsdxConstants.CHARACTER);
     return this.getValue(styleElem, "");
   };
   /**
@@ -3807,7 +3807,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getTextFont = function (index) {
-    var fontElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.FONT, index, mxVsdxConstants.CHARACTER);
+    var fontElem = this.getCellElement3Args(mxVsdxConstants.FONT, index, mxVsdxConstants.CHARACTER);
     return this.getValue(fontElem, "");
   };
   /**
@@ -3817,7 +3817,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getTextPos = function (index) {
-    var posElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.POS, index, mxVsdxConstants.CHARACTER);
+    var posElem = this.getCellElement3Args(mxVsdxConstants.POS, index, mxVsdxConstants.CHARACTER);
     return this.getValue(posElem, "");
   };
   /**
@@ -3827,7 +3827,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getTextStrike = function (index) {
-    var strikeElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.STRIKETHRU, index, mxVsdxConstants.CHARACTER);
+    var strikeElem = this.getCellElement3Args(mxVsdxConstants.STRIKETHRU, index, mxVsdxConstants.CHARACTER);
     return (function (o1, o2) {
       if (o1 && o1.equals) {
         return o1.equals(o2);
@@ -3844,7 +3844,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getTextCase = function (index) {
-    var caseElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.CASE, index, mxVsdxConstants.CHARACTER);
+    var caseElem = this.getCellElement3Args(mxVsdxConstants.CASE, index, mxVsdxConstants.CHARACTER);
     return this.getValue(caseElem, "");
   };
   /**
@@ -3855,7 +3855,7 @@ var Style = (function () {
    */
   Style.prototype.getHorizontalAlign = function (index, html) {
     var ret = "center";
-    var horAlign = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.HORIZONTAL_ALIGN, index, mxVsdxConstants.PARAGRAPH);
+    var horAlign = this.getCellElement3Args(mxVsdxConstants.HORIZONTAL_ALIGN, index, mxVsdxConstants.PARAGRAPH);
     var align = this.getValue(horAlign, "");
     switch ((align)) {
       case "0":
@@ -3880,8 +3880,8 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getIndentFirst = function (index) {
-    var indentFirstElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.INDENT_FIRST, index, mxVsdxConstants.PARAGRAPH);
-    return new String(this.getScreenNumericalValue$org_w3c_dom_Element$double(indentFirstElem, 0)).toString();
+    var indentFirstElem = this.getCellElement3Args(mxVsdxConstants.INDENT_FIRST, index, mxVsdxConstants.PARAGRAPH);
+    return new String(this.getScreenNumericalValueDefault(indentFirstElem, 0)).toString();
   };
   /**
    * Returns the indent to left of one paragraph
@@ -3890,8 +3890,8 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getIndentLeft = function (index) {
-    var indentLeftElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.INDENT_LEFT, index, mxVsdxConstants.PARAGRAPH);
-    return new String((Math.round(this.getScreenNumericalValue$org_w3c_dom_Element$double(indentLeftElem, 0)) | 0)).toString();
+    var indentLeftElem = this.getCellElement3Args(mxVsdxConstants.INDENT_LEFT, index, mxVsdxConstants.PARAGRAPH);
+    return new String((Math.round(this.getScreenNumericalValueDefault(indentLeftElem, 0)) | 0)).toString();
   };
   /**
    * Returns the indent to right of one paragraph
@@ -3900,8 +3900,8 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getIndentRight = function (index) {
-    var indentRightElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.INDENT_RIGHT, index, mxVsdxConstants.PARAGRAPH);
-    return new String((Math.round(this.getScreenNumericalValue$org_w3c_dom_Element$double(indentRightElem, 0)) | 0)).toString();
+    var indentRightElem = this.getCellElement3Args(mxVsdxConstants.INDENT_RIGHT, index, mxVsdxConstants.PARAGRAPH);
+    return new String((Math.round(this.getScreenNumericalValueDefault(indentRightElem, 0)) | 0)).toString();
   };
   /**
    * Returns the space before one paragraph.
@@ -3910,8 +3910,8 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getSpBefore = function (index) {
-    var spBeforeElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.SPACE_BEFORE, index, mxVsdxConstants.PARAGRAPH);
-    return new String((Math.round(this.getScreenNumericalValue$org_w3c_dom_Element$double(spBeforeElem, 0)) | 0)).toString();
+    var spBeforeElem = this.getCellElement3Args(mxVsdxConstants.SPACE_BEFORE, index, mxVsdxConstants.PARAGRAPH);
+    return new String((Math.round(this.getScreenNumericalValueDefault(spBeforeElem, 0)) | 0)).toString();
   };
   /**
    * Returns the space after one paragraph
@@ -3920,8 +3920,8 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getSpAfter = function (index) {
-    var spAfterElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.SPACE_AFTER, index, mxVsdxConstants.PARAGRAPH);
-    return new String((Math.round(this.getScreenNumericalValue$org_w3c_dom_Element$double(spAfterElem, 0)) | 0)).toString();
+    var spAfterElem = this.getCellElement3Args(mxVsdxConstants.SPACE_AFTER, index, mxVsdxConstants.PARAGRAPH);
+    return new String((Math.round(this.getScreenNumericalValueDefault(spAfterElem, 0)) | 0)).toString();
   };
   /**
    * Returns the space between lines in one paragraph.
@@ -3930,7 +3930,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getSpLine = function (index) {
-    var spLineElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.SPACE_LINE, index, mxVsdxConstants.PARAGRAPH);
+    var spLineElem = this.getCellElement3Args(mxVsdxConstants.SPACE_LINE, index, mxVsdxConstants.PARAGRAPH);
     var val = this.getValue(spLineElem, "");
     if (!(function (o1, o2) {
         if (o1 && o1.equals) {
@@ -3951,7 +3951,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getFlags = function (index) {
-    var flagsElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.FLAGS, index, mxVsdxConstants.PARAGRAPH);
+    var flagsElem = this.getCellElement3Args(mxVsdxConstants.FLAGS, index, mxVsdxConstants.PARAGRAPH);
     return this.getValue(flagsElem, "0");
   };
   /**
@@ -3961,8 +3961,8 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getLetterSpace = function (index) {
-    var letterSpaceElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.LETTER_SPACE, index, mxVsdxConstants.PARAGRAPH);
-    return new String(this.getScreenNumericalValue$org_w3c_dom_Element$double(letterSpaceElem, 0)).toString();
+    var letterSpaceElem = this.getCellElement3Args(mxVsdxConstants.LETTER_SPACE, index, mxVsdxConstants.PARAGRAPH);
+    return new String(this.getScreenNumericalValueDefault(letterSpaceElem, 0)).toString();
   };
   /**
    * Returns the bullet element value.
@@ -3971,7 +3971,7 @@ var Style = (function () {
    * @param {string} index
    */
   Style.prototype.getBullet = function (index) {
-    var bulletElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.BULLET, index, mxVsdxConstants.PARAGRAPH);
+    var bulletElem = this.getCellElement3Args(mxVsdxConstants.BULLET, index, mxVsdxConstants.PARAGRAPH);
     return this.getValue(bulletElem, "0");
   };
   Style.prototype.getShape = function () {
@@ -3980,27 +3980,27 @@ var Style = (function () {
   Style.prototype.setShape = function (shape) {
     this.shape = shape;
   };
-  Style.lineDashPatterns_$LI$ = function () {
-    Style.__static_initialize();
+  Style.getLineDashPatterns = function () {
+    Style.initialize();
     if (Style.lineDashPatterns == null)
       Style.lineDashPatterns = ([]);
     return Style.lineDashPatterns;
   };
   ;
-  Style.__static_initializer_1 = function () {
+  Style.initializer_1 = function () {
     /* add */
-    (Style.lineDashPatterns_$LI$().push([]) > 0);
+    (Style.getLineDashPatterns().push([]) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push([]) > 0);
+    (Style.getLineDashPatterns().push([]) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push([]) > 0);
+    (Style.getLineDashPatterns().push([]) > 0);
     var lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.DOT) > 0);
     /* add */
     (lineDashPattern.push(Style.SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.DASH) > 0);
@@ -4011,7 +4011,7 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.DASH) > 0);
@@ -4026,7 +4026,7 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.DASH) > 0);
@@ -4041,7 +4041,7 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.LONG_DASH) > 0);
@@ -4052,7 +4052,7 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.LONG_DASH) > 0);
@@ -4067,32 +4067,21 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.SHORT_DASH) > 0);
     /* add */
     (lineDashPattern.push(Style.SHORT_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.DOT) > 0);
     /* add */
     (lineDashPattern.push(Style.SHORT_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
-    lineDashPattern = ([]);
-    /* add */
-    (lineDashPattern.push(Style.SHORT_DASH) > 0);
-    /* add */
-    (lineDashPattern.push(Style.SHORT_SPACE) > 0);
-    /* add */
-    (lineDashPattern.push(Style.DOT) > 0);
-    /* add */
-    (lineDashPattern.push(Style.SHORT_SPACE) > 0);
-    /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.SHORT_DASH) > 0);
@@ -4103,11 +4092,22 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SHORT_SPACE) > 0);
     /* add */
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
+    lineDashPattern = ([]);
+    /* add */
+    (lineDashPattern.push(Style.SHORT_DASH) > 0);
+    /* add */
+    (lineDashPattern.push(Style.SHORT_SPACE) > 0);
+    /* add */
     (lineDashPattern.push(Style.DOT) > 0);
     /* add */
     (lineDashPattern.push(Style.SHORT_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (lineDashPattern.push(Style.DOT) > 0);
+    /* add */
+    (lineDashPattern.push(Style.SHORT_SPACE) > 0);
+    /* add */
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.SHORT_DASH) > 0);
@@ -4122,7 +4122,7 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SHORT_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.DASH) > 0);
@@ -4133,7 +4133,7 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SHORT_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.DASH) > 0);
@@ -4148,32 +4148,21 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.SHORT_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.LONG_DASH) > 0);
     /* add */
     (lineDashPattern.push(Style.LONG_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.DOT) > 0);
     /* add */
     (lineDashPattern.push(Style.LONG_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
-    lineDashPattern = ([]);
-    /* add */
-    (lineDashPattern.push(Style.LONG_DASH) > 0);
-    /* add */
-    (lineDashPattern.push(Style.LONG_SPACE) > 0);
-    /* add */
-    (lineDashPattern.push(Style.DOT) > 0);
-    /* add */
-    (lineDashPattern.push(Style.LONG_SPACE) > 0);
-    /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.LONG_DASH) > 0);
@@ -4184,11 +4173,22 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.LONG_SPACE) > 0);
     /* add */
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
+    lineDashPattern = ([]);
+    /* add */
+    (lineDashPattern.push(Style.LONG_DASH) > 0);
+    /* add */
+    (lineDashPattern.push(Style.LONG_SPACE) > 0);
+    /* add */
     (lineDashPattern.push(Style.DOT) > 0);
     /* add */
     (lineDashPattern.push(Style.LONG_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (lineDashPattern.push(Style.DOT) > 0);
+    /* add */
+    (lineDashPattern.push(Style.LONG_SPACE) > 0);
+    /* add */
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.LONG_DASH) > 0);
@@ -4203,7 +4203,7 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.LONG_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.XLONG_DASH) > 0);
@@ -4214,7 +4214,7 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.LONG_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.XLONG_DASH) > 0);
@@ -4229,22 +4229,22 @@ var Style = (function () {
     /* add */
     (lineDashPattern.push(Style.LONG_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
     lineDashPattern = ([]);
     /* add */
     (lineDashPattern.push(Style.XSHORT_DASH) > 0);
     /* add */
     (lineDashPattern.push(Style.SHORT_SPACE) > 0);
     /* add */
-    (Style.lineDashPatterns_$LI$().push(lineDashPattern) > 0);
+    (Style.getLineDashPatterns().push(lineDashPattern) > 0);
   };
   Style.getLineDashPattern = function (pattern) {
     if (pattern >= 0 && pattern <= 23)
-      return Style.lineDashPatterns_$LI$()[pattern];
+      return Style.getLineDashPatterns()[pattern];
     else
-      return Style.lineDashPatterns_$LI$()[0];
+      return Style.getLineDashPatterns()[0];
   };
-  Style.__static_initialized = false;
+  Style.initialized = false;
   Style.vsdxStyleDebug = false;
   Style.SPACE = 4.0;
   Style.SHORT_SPACE = 2.0;
@@ -4318,16 +4318,16 @@ var Shape = (function (_super) {
      */
     _this.fld = "0";
 
-    _this.width = _this.getScreenNumericalValue$org_w3c_dom_Element$double(/* get */ (function (m, k) {
+    _this.width = _this.getScreenNumericalValueDefault(/* get */ (function (m, k) {
       return m[k] ? m[k] : null;
     })(_this.cellElements, mxVsdxConstants.WIDTH), 0);
-    _this.height = _this.getScreenNumericalValue$org_w3c_dom_Element$double(/* get */ (function (m, k) {
+    _this.height = _this.getScreenNumericalValueDefault(/* get */ (function (m, k) {
       return m[k] ? m[k] : null;
     })(_this.cellElements, mxVsdxConstants.HEIGHT), 0);
     return _this;
   }
 
-  Shape.UNICODE_LINE_SEP_$LI$ = function () {
+  Shape.getUnicodeLineSep = function () {
     if (Shape.UNICODE_LINE_SEP == null) {
       Shape.ERROR_IMAGE = "PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8IS0tIENyZWF0ZWQgd2l0aCBJbmtzY2FwZSAoaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvKSAtLT4NCjxzdmcNCiAgIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyINCiAgIHhtbG5zOmNjPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyMiDQogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiDQogICB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIg0KICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIg0KICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIg0KICAgeG1sbnM6aW5rc2NhcGU9Imh0dHA6Ly93d3cuaW5rc2NhcGUub3JnL25hbWVzcGFjZXMvaW5rc2NhcGUiDQogICB3aWR0aD0iMjUwIg0KICAgaGVpZ2h0PSIyNTAiDQogICBpZD0ic3ZnMzMxOSINCiAgIHNvZGlwb2RpOnZlcnNpb249IjAuMzIiDQogICBpbmtzY2FwZTp2ZXJzaW9uPSIwLjQ2Ig0KICAgdmVyc2lvbj0iMS4wIg0KICAgc29kaXBvZGk6ZG9jbmFtZT0ibm9waG90b19pLnN2ZyINCiAgIGlua3NjYXBlOm91dHB1dF9leHRlbnNpb249Im9yZy5pbmtzY2FwZS5vdXRwdXQuc3ZnLmlua3NjYXBlIj4NCiAgPGRlZnMNCiAgICAgaWQ9ImRlZnMzMzIxIj4NCiAgICA8aW5rc2NhcGU6cGVyc3BlY3RpdmUNCiAgICAgICBzb2RpcG9kaTp0eXBlPSJpbmtzY2FwZTpwZXJzcDNkIg0KICAgICAgIGlua3NjYXBlOnZwX3g9IjAgOiA1MjYuMTgxMDkgOiAxIg0KICAgICAgIGlua3NjYXBlOnZwX3k9IjAgOiAxMDAwIDogMCINCiAgICAgICBpbmtzY2FwZTp2cF96PSI3NDQuMDk0NDggOiA1MjYuMTgxMDkgOiAxIg0KICAgICAgIGlua3NjYXBlOnBlcnNwM2Qtb3JpZ2luPSIzNzIuMDQ3MjQgOiAzNTAuNzg3MzkgOiAxIg0KICAgICAgIGlkPSJwZXJzcGVjdGl2ZTMzMjciIC8+DQogICAgPGlua3NjYXBlOnBlcnNwZWN0aXZlDQogICAgICAgaWQ9InBlcnNwZWN0aXZlMzM0MiINCiAgICAgICBpbmtzY2FwZTpwZXJzcDNkLW9yaWdpbj0iMzcyLjA0NzI0IDogMzUwLjc4NzM5IDogMSINCiAgICAgICBpbmtzY2FwZTp2cF96PSI3NDQuMDk0NDggOiA1MjYuMTgxMDkgOiAxIg0KICAgICAgIGlua3NjYXBlOnZwX3k9IjAgOiAxMDAwIDogMCINCiAgICAgICBpbmtzY2FwZTp2cF94PSIwIDogNTI2LjE4MTA5IDogMSINCiAgICAgICBzb2RpcG9kaTp0eXBlPSJpbmtzY2FwZTpwZXJzcDNkIiAvPg0KICA8L2RlZnM+DQogIDxzb2RpcG9kaTpuYW1lZHZpZXcNCiAgICAgaWQ9ImJhc2UiDQogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiINCiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiDQogICAgIGJvcmRlcm9wYWNpdHk9IjEuMCINCiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCINCiAgICAgaW5rc2NhcGU6cGFnZXNoYWRvdz0iMiINCiAgICAgaW5rc2NhcGU6em9vbT0iMi4yNDI5NDI3Ig0KICAgICBpbmtzY2FwZTpjeD0iMTIxLjk3NjQ4Ig0KICAgICBpbmtzY2FwZTpjeT0iMTIyLjQ0MTk4Ig0KICAgICBpbmtzY2FwZTpkb2N1bWVudC11bml0cz0icHgiDQogICAgIGlua3NjYXBlOmN1cnJlbnQtbGF5ZXI9ImxheWVyMSINCiAgICAgc2hvd2dyaWQ9ImZhbHNlIg0KICAgICBpbmtzY2FwZTp3aW5kb3ctd2lkdGg9IjE2NjQiDQogICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9Ijg0NCINCiAgICAgaW5rc2NhcGU6d2luZG93LXg9Ii0zIg0KICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTE4IiAvPg0KICA8bWV0YWRhdGENCiAgICAgaWQ9Im1ldGFkYXRhMzMyNCI+DQogICAgPHJkZjpSREY+DQogICAgICA8Y2M6V29yaw0KICAgICAgICAgcmRmOmFib3V0PSIiPg0KICAgICAgICA8ZGM6Zm9ybWF0PmltYWdlL3N2Zyt4bWw8L2RjOmZvcm1hdD4NCiAgICAgICAgPGRjOnR5cGUNCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4NCiAgICAgICAgPGRjOnRpdGxlPkZvdG9ncmFmaWVydmVyYm90PC9kYzp0aXRsZT4NCiAgICAgICAgPGRjOmRhdGU+MjAwOC0wNi0yOTwvZGM6ZGF0ZT4NCiAgICAgICAgPGRjOmNyZWF0b3I+DQogICAgICAgICAgPGNjOkFnZW50Pg0KICAgICAgICAgICAgPGRjOnRpdGxlPlRvcnJzdGVuIFNrb21wPC9kYzp0aXRsZT4NCiAgICAgICAgICA8L2NjOkFnZW50Pg0KICAgICAgICA8L2RjOmNyZWF0b3I+DQogICAgICAgIDxkYzpyaWdodHM+DQogICAgICAgICAgPGNjOkFnZW50Pg0KICAgICAgICAgICAgPGRjOnRpdGxlPlRvcnN0ZW4gU2tvbXA8L2RjOnRpdGxlPg0KICAgICAgICAgIDwvY2M6QWdlbnQ+DQogICAgICAgIDwvZGM6cmlnaHRzPg0KICAgICAgICA8ZGM6cHVibGlzaGVyPg0KICAgICAgICAgIDxjYzpBZ2VudD4NCiAgICAgICAgICAgIDxkYzp0aXRsZT5Ub3JzdGVuIFNrb21wPC9kYzp0aXRsZT4NCiAgICAgICAgICA8L2NjOkFnZW50Pg0KICAgICAgICA8L2RjOnB1Ymxpc2hlcj4NCiAgICAgICAgPGRjOmxhbmd1YWdlPmRlX0RFPC9kYzpsYW5ndWFnZT4NCiAgICAgICAgPGRjOnN1YmplY3Q+DQogICAgICAgICAgPHJkZjpCYWc+DQogICAgICAgICAgICA8cmRmOmxpPlBpa3RvZ3JhbW07IEZvdG9ncmFmaWVydmVyYm90PC9yZGY6bGk+DQogICAgICAgICAgPC9yZGY6QmFnPg0KICAgICAgICA8L2RjOnN1YmplY3Q+DQogICAgICAgIDxkYzpkZXNjcmlwdGlvbj5Gb3RvZ3JhZmllcnZlcmJvdCBhbHMgUGlrdG9ncmFtbSA8L2RjOmRlc2NyaXB0aW9uPg0KICAgICAgICA8Y2M6bGljZW5zZQ0KICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL3B1YmxpY2RvbWFpbi8iIC8+DQogICAgICA8L2NjOldvcms+DQogICAgICA8Y2M6TGljZW5zZQ0KICAgICAgICAgcmRmOmFib3V0PSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9saWNlbnNlcy9wdWJsaWNkb21haW4vIj4NCiAgICAgICAgPGNjOnBlcm1pdHMNCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vY3JlYXRpdmVjb21tb25zLm9yZy9ucyNSZXByb2R1Y3Rpb24iIC8+DQogICAgICAgIDxjYzpwZXJtaXRzDQogICAgICAgICAgIHJkZjpyZXNvdXJjZT0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjRGlzdHJpYnV0aW9uIiAvPg0KICAgICAgICA8Y2M6cGVybWl0cw0KICAgICAgICAgICByZGY6cmVzb3VyY2U9Imh0dHA6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL25zI0Rlcml2YXRpdmVXb3JrcyIgLz4NCiAgICAgIDwvY2M6TGljZW5zZT4NCiAgICA8L3JkZjpSREY+DQogIDwvbWV0YWRhdGE+DQogIDxnDQogICAgIGlua3NjYXBlOmxhYmVsPSJFYmVuZSAxIg0KICAgICBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIg0KICAgICBpZD0ibGF5ZXIxIj4NCiAgICA8cGF0aA0KICAgICAgIHN0eWxlPSJmaWxsOiMwMDAwMDA7ZmlsbC1vcGFjaXR5OjEiDQogICAgICAgZD0iTSAxNjQuNTMxMjUgNjIuNjg3NSBDIDE2Mi43OTExNSA2Mi42ODc1MDEgMTYxLjM3NSA2NC4wNzI0MTYgMTYxLjM3NSA2NS44MTI1IEwgMTYxLjM3NSA2OC43NSBMIDM4LjM3NSA2OC43NSBDIDM1LjA5MjI5OCA2OC43NDk5OTkgMzIuNDY4NzUgNzEuMzczNTQ4IDMyLjQ2ODc1IDc0LjY1NjI1IEwgMzIuNDY4NzUgMTgxLjM3NSBDIDMyLjQ2ODc1IDE4NC42NTc3IDM1LjA5MjMwNyAxODcuMzEyNTEgMzguMzc1IDE4Ny4zMTI1IEwgMjExLjYyNSAxODcuMzEyNSBDIDIxNC45MDc2OSAxODcuMzEyNSAyMTcuNTMxMjcgMTg0LjY1NzcgMjE3LjUzMTI1IDE4MS4zNzUgTCAyMTcuNTMxMjUgNzQuNjU2MjUgQyAyMTcuNTMxMjUgNzEuMzczNTUxIDIxNC45MDc2OCA2OC43NSAyMTEuNjI1IDY4Ljc1IEwgMjAyLjA2MjUgNjguNzUgTCAyMDIuMDYyNSA2NS44MTI1IEMgMjAyLjA2MjUgNjQuMDcyNDEgMjAwLjY0NjM1IDYyLjY4NzUgMTk4LjkwNjI1IDYyLjY4NzUgTCAxNjQuNTMxMjUgNjIuNjg3NSB6IE0gNDYuODEyNSA3OCBMIDg4LjY1NjI1IDc4IEMgOTAuMzk2MzQyIDc4IDkxLjgxMjUgNzkuMzg0OTA3IDkxLjgxMjUgODEuMTI1IEwgOTEuODEyNSA5Ni4zMTI1IEMgOTEuODEyNSA5OC4wNTI1OTIgOTAuMzk2MzQzIDk5LjQzNzUgODguNjU2MjUgOTkuNDM3NSBMIDQ2LjgxMjUgOTkuNDM3NSBDIDQ1LjA3MjQwOCA5OS40Mzc1IDQzLjY4NzUgOTguMDUyNTkzIDQzLjY4NzUgOTYuMzEyNSBMIDQzLjY4NzUgODEuMTI1IEMgNDMuNjg3NSA3OS4zODQ5MDggNDUuMDcyNDA3IDc4IDQ2LjgxMjUgNzggeiBNIDE0NiA4OC4yMTg3NSBDIDE2Ny43MzQ3NSA4OC4yMTg3NTMgMTg1LjM3NSAxMDYuMTUwNzEgMTg1LjM3NSAxMjguMjUgQyAxODUuMzc0OTkgMTUwLjM0OTI4IDE2Ny43MzQ3NCAxNjguMjgxMjUgMTQ2IDE2OC4yODEyNSBDIDEyNC4yNjUyNyAxNjguMjgxMjYgMTA2LjYyNSAxNTAuMzQ5MjkgMTA2LjYyNSAxMjguMjUgQyAxMDYuNjI1IDEwNi4xNTA3MSAxMjQuMjY1MjYgODguMjE4NzUgMTQ2IDg4LjIxODc1IHogTSAxNDYgOTEuNzE4NzUgQyAxMjYuMTY1NTcgOTEuNzE4NzUgMTEwLjA2MjUgMTA4LjA4Mjg5IDExMC4wNjI1IDEyOC4yNSBDIDExMC4wNjI1IDE0OC40MTcxMSAxMjYuMTY1NTcgMTY0Ljc4MTI2IDE0NiAxNjQuNzgxMjUgQyAxNjUuODM0NDMgMTY0Ljc4MTI1IDE4MS45Mzc1IDE0OC40MTcxIDE4MS45Mzc1IDEyOC4yNSBDIDE4MS45Mzc1IDEwOC4wODI4OSAxNjUuODM0NDMgOTEuNzE4NzUgMTQ2IDkxLjcxODc1IHogTSAxNDYgOTYuNTkzNzUgQyAxNjMuMTc3NjggOTYuNTkzNzUyIDE3Ny4xMjUgMTEwLjc4NDIgMTc3LjEyNSAxMjguMjUgQyAxNzcuMTI0OTkgMTQ1LjcxNTggMTYzLjE3NzY5IDE1OS44NzUgMTQ2IDE1OS44NzUgQyAxMjguODIyMzEgMTU5Ljg3NSAxMTQuODc1IDE0NS43MTU4IDExNC44NzUgMTI4LjI1IEMgMTE0Ljg3NSAxMTAuNzg0MTkgMTI4LjgyMjMxIDk2LjU5Mzc1IDE0NiA5Ni41OTM3NSB6IE0gMTc2LjUgMTcyLjcxODc1IEwgMjA2LjE4NzUgMTcyLjcxODc1IEMgMjA3LjQyMTM4IDE3Mi43MTg3NSAyMDguNDA2MjUgMTczLjEyNzgzIDIwOC40MDYyNSAxNzMuNjI1IEwgMjA4LjQwNjI1IDE3Ny45Njg3NSBDIDIwOC40MDYyNSAxNzguNDY1OTIgMjA3LjQyMTM4IDE3OC44NDM3NSAyMDYuMTg3NSAxNzguODQzNzUgTCAxNzYuNSAxNzguODQzNzUgQyAxNzUuMjY2MTEgMTc4Ljg0Mzc1IDE3NC4yODEyNSAxNzguNDY1OTIgMTc0LjI4MTI1IDE3Ny45Njg3NSBMIDE3NC4yODEyNSAxNzMuNjI1IEMgMTc0LjI4MTI1IDE3My4xMjc4MyAxNzUuMjY2MTIgMTcyLjcxODc1IDE3Ni41IDE3Mi43MTg3NSB6ICINCiAgICAgICBpZD0icmVjdDMyMDkiIC8+DQogICAgPHBhdGgNCiAgICAgICBzdHlsZT0iZmlsbDojYzQyNjFkO2ZpbGwtb3BhY2l0eToxIg0KICAgICAgIGQ9Ik0gMjAgMCBDIDE4LjU1OTkzOCAwIDE3LjE2NDc0NyAwLjE1MDk4NjY2IDE1LjgxMjUgMC40Mzc1IEMgMTUuMjEwMjkxIDAuNTY1MTk1NzggMTQuNjExOTEzIDAuNzI2MjExMjYgMTQuMDMxMjUgMC45MDYyNSBDIDEzLjU1NDc3MyAxLjA1Mzk4NTIgMTMuMDg1MzQ5IDEuMjI0ODUzNiAxMi42MjUgMS40MDYyNSBDIDEyLjMyODc2NiAxLjUyMzA3MzkgMTIuMDM5MDMzIDEuNjUwOTE4MiAxMS43NSAxLjc4MTI1IEMgMTEuMzQ3Mjc4IDEuOTYyMzU5OCAxMC45NTA0MDYgMi4xMzc0MTY1IDEwLjU2MjUgMi4zNDM3NSBDIDEwLjUyMTU1NSAyLjM2NTU2ODggMTAuNDc4MjczIDIuMzg0MTU1NSAxMC40Mzc1IDIuNDA2MjUgQyAxMC40MTY5MzQgMi40MTczNzU0IDEwLjM5NTUyMiAyLjQyNjMwNDkgMTAuMzc1IDIuNDM3NSBDIDkuODMyNjg2MSAyLjczMzM0NDYgOS4zMjI2NDQ4IDMuMDYzMjQ1MiA4LjgxMjUgMy40MDYyNSBDIDguMjgzMTIyMSAzLjc2MjE4NjUgNy43NzI3NzI4IDQuMTU4OTIwOSA3LjI4MTI1IDQuNTYyNSBDIDcuMjc1MDU1IDQuNTY3NTg2NiA3LjI1NjE4ODggNC41NTc0MDYxIDcuMjUgNC41NjI1IEMgNy4yMzg1NDc5IDQuNTcxOTQzNCA3LjIzMDE4MDYgNC41ODQyODE2IDcuMjE4NzUgNC41OTM3NSBDIDcuMTA0NzM1MiA0LjY4ODAxNTkgNi45ODY4NTA3IDQuNzc4MjY4NyA2Ljg3NSA0Ljg3NSBDIDYuNTE1NzAyMSA1LjE4NjQyNjQgNi4xNzk3OTA5IDUuNTA3NzA5MSA1Ljg0Mzc1IDUuODQzNzUgQyA1LjQwNDQwMjUgNi4yODE4MDc4IDQuOTkwNzQ0OSA2Ljc0MTM1NTQgNC41OTM3NSA3LjIxODc1IEMgNC41NzkwMDg2IDcuMjM2NTQ2MiA0LjU3NzE4MDYgNy4yNjM0MDE1IDQuNTYyNSA3LjI4MTI1IEMgMy43Njc0ODk4IDguMjQzOTE4MSAzLjA0MjI3MjEgOS4yNzE4NzA1IDIuNDM3NSAxMC4zNzUgQyAyLjQyNjIyMzIgMTAuMzk1NjM1IDIuNDE3NDU2MSAxMC40MTY4MiAyLjQwNjI1IDEwLjQzNzUgQyAyLjEwODM5MDggMTAuOTg1MzQ4IDEuODQwMjIzMyAxMS41NDcyMTQgMS41OTM3NSAxMi4xMjUgQyAxLjU3NTU4NjUgMTIuMTY3NjY1IDEuNTQ5MTI1NSAxMi4yMDcxODIgMS41MzEyNSAxMi4yNSBDIDEuMjg3NzEzMSAxMi44MzI0MzMgMS4wOTQ2NzU0IDEzLjQyMTgyMiAwLjkwNjI1IDE0LjAzMTI1IEMgMC43Mjk2MzAxNCAxNC42MDI0OTUgMC41NjMwOTYzNCAxNS4xODg4MjggMC40Mzc1IDE1Ljc4MTI1IEMgMC4xNDY5MTQwNCAxNy4xNDI1NzggLTQuMzkwNjEzM2UtMTggMTguNTQ5NDY2IDAgMjAgTCAwIDIzMCBDIDAgMjQxLjA4IDguOTIgMjUwIDIwIDI1MCBMIDIzMCAyNTAgQyAyMzEuNDQwMDYgMjUwIDIzMi44MzUyNSAyNDkuODQ5MDEgMjM0LjE4NzUgMjQ5LjU2MjUgQyAyMzQuNzg5MDMgMjQ5LjQzNDk3IDIzNS4zODg2NiAyNDkuMjczODEgMjM1Ljk2ODc1IDI0OS4wOTM3NSBDIDIzNi40NDQ3NiAyNDguOTQ2IDIzNi45MTUwNSAyNDguNzc1MjYgMjM3LjM3NSAyNDguNTkzNzUgQyAyMzcuNjcxMjMgMjQ4LjQ3NjkzIDIzNy45NjA5NyAyNDguMzQ5MDggMjM4LjI1IDI0OC4yMTg3NSBDIDIzOC4yNzk4MSAyNDguMjA1MzEgMjM4LjMxNDAyIDI0OC4yMDEwOSAyMzguMzQzNzUgMjQ4LjE4NzUgQyAyMzguNzU4MzYgMjQ3Ljk5ODMgMjM5LjE2Mzc0IDI0Ny44MDk4MSAyMzkuNTYyNSAyNDcuNTkzNzUgQyAyMzkuNTgzMTggMjQ3LjU4MjU0IDIzOS42MDQzNiAyNDcuNTczNzggMjM5LjYyNSAyNDcuNTYyNSBDIDI0MC4xNjkyNSAyNDcuMjY1MTIgMjQwLjY3NTU4IDI0Ni45Mzg3MyAyNDEuMTg3NSAyNDYuNTkzNzUgQyAyNDEuNjY4NzggMjQ2LjI2OTQxIDI0Mi4xNDM1OSAyNDUuOTI2MzkgMjQyLjU5Mzc1IDI0NS41NjI1IEMgMjQyLjY0NDc0IDI0NS41MjEyOCAyNDIuNjk5NDMgMjQ1LjQ3OTIxIDI0Mi43NSAyNDUuNDM3NSBDIDI0Mi44NzY1MSAyNDUuMzMzMTggMjQzLjAwMTE1IDI0NS4yMzIzNSAyNDMuMTI1IDI0NS4xMjUgQyAyNDMuNDgyNjUgMjQ0LjgxNTM4IDI0My44MjE1NSAyNDQuNDkwMTkgMjQ0LjE1NjI1IDI0NC4xNTYyNSBDIDI0NC40OTIyOSAyNDMuODIwMjEgMjQ0LjgxMzU3IDI0My40ODQzIDI0NS4xMjUgMjQzLjEyNSBDIDI0NS4yMzE2NyAyNDMuMDAyMzQgMjQ1LjMzMzgxIDI0Mi44NzUyNyAyNDUuNDM3NSAyNDIuNzUgQyAyNDUuNDQyNzYgMjQyLjc0MzYyIDI0NS40MzIyNSAyNDIuNzI1MTMgMjQ1LjQzNzUgMjQyLjcxODc1IEMgMjQ1Ljg0MjQ5IDI0Mi4yMjgzIDI0Ni4yMzY0IDI0MS43MTU3NiAyNDYuNTkzNzUgMjQxLjE4NzUgQyAyNDYuOTM4MTIgMjQwLjY3ODQzIDI0Ny4yNjUzNiAyNDAuMTY2MjIgMjQ3LjU2MjUgMjM5LjYyNSBDIDI0Ny41NzM2MyAyMzkuNjA0NzIgMjQ3LjU4MjY4IDIzOS41ODI4MiAyNDcuNTkzNzUgMjM5LjU2MjUgQyAyNDcuODkxOTcgMjM5LjAxNDggMjQ4LjE1OTMxIDIzOC40NTIzOSAyNDguNDA2MjUgMjM3Ljg3NSBDIDI0OC40MTU1NCAyMzcuODUzMjggMjQ4LjQyODI5IDIzNy44MzQyNiAyNDguNDM3NSAyMzcuODEyNSBDIDI0OC40NDY0NCAyMzcuNzkxMjkgMjQ4LjQ1OTg4IDIzNy43NzEyNSAyNDguNDY4NzUgMjM3Ljc1IEMgMjQ4LjcwOTkyIDIzNy4xNzQ3NiAyNDguOTA2MjggMjM2LjU3MDA4IDI0OS4wOTM3NSAyMzUuOTY4NzUgQyAyNDkuMjczNzUgMjM1LjM5MTM3IDI0OS40MzQ2OCAyMzQuODE3NTQgMjQ5LjU2MjUgMjM0LjIxODc1IEMgMjQ5Ljg1MzA5IDIzMi44NTc0MiAyNTAgMjMxLjQ1MDUzIDI1MCAyMzAgTCAyNTAgMjAgQyAyNTAgOC45MiAyNDEuMDggLTMuMzUzNzk4N2UtMTcgMjMwIDAgTCAyMCAwIHogTSAzNC43ODEyNSAxOS40MDYyNSBMIDIyNS40Njg3NSAxOS40MDYyNSBDIDIyOC4zMDk0NiAxOS40MDYyNSAyMzAuNTkzNzUgMjEuNjkwNTQ0IDIzMC41OTM3NSAyNC41MzEyNSBMIDIzMC41OTM3NSAyMTUuMjUgTCAzNC43ODEyNSAxOS40MDYyNSB6IE0gMTkuNDA2MjUgMzQuNzUgTCAyMTUuMjE4NzUgMjMwLjU5Mzc1IEwgMjQuNTMxMjUgMjMwLjU5Mzc1IEMgMjEuNjkwNTQ0IDIzMC41OTM3NiAxOS40MDYyNSAyMjguMzA5NDYgMTkuNDA2MjUgMjI1LjQ2ODc1IEwgMTkuNDA2MjUgMzQuNzUgeiAiDQogICAgICAgaWQ9InBhdGgzMTk2IiAvPg0KICA8L2c+DQo8L3N2Zz4NCg==";
       Shape.UNICODE_LINE_SEP = String.fromCharCode(8232);//[String.fromCharCode(226), String.fromCharCode(128), String.fromCharCode(168)].join('');
@@ -4891,7 +4891,7 @@ var Shape = (function (_super) {
     var isPercent = false;
     var space = this.getSpLine(index);
     if (space > 0) {
-      space = space * mxVsdxUtils.conversionFactor_$LI$();
+      space = space * mxVsdxUtils.getConversionFactor();
     }
     else if (space === 0) {
       space = 100;
@@ -4940,7 +4940,7 @@ var Shape = (function (_super) {
    * @return {string} Direction of the text.
    */
   Shape.prototype.getRtlText = function (index) {
-    var rtlElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.RTL_TEXT, index, mxVsdxConstants.PARAGRAPH);
+    var rtlElem = this.getCellElement3Args(mxVsdxConstants.RTL_TEXT, index, mxVsdxConstants.PARAGRAPH);
     var direction = this.getValue(rtlElem, "ltr");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
@@ -5109,7 +5109,7 @@ var Shape = (function (_super) {
     return isSmallCaps;
   };
   Shape.prototype.getTextOpacity = function (index) {
-    var colorTrans = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.COLOR_TRANS, index, mxVsdxConstants.CHARACTER);
+    var colorTrans = this.getCellElement3Args(mxVsdxConstants.COLOR_TRANS, index, mxVsdxConstants.CHARACTER);
     var trans = this.getValue(colorTrans, "0");
     var result = "1";
     if (trans != null && !(trans.length === 0)) {
@@ -5126,8 +5126,8 @@ var Shape = (function (_super) {
    * @return {string} Returns the size of the font in pixels.
    */
   Shape.prototype.getTextSize = function (index) {
-    var sizeElem = this.getCellElement$java_lang_String$java_lang_String$java_lang_String(mxVsdxConstants.SIZE, index, mxVsdxConstants.CHARACTER);
-    var size = this.getScreenNumericalValue$org_w3c_dom_Element$double(sizeElem, 12);
+    var sizeElem = this.getCellElement3Args(mxVsdxConstants.SIZE, index, mxVsdxConstants.CHARACTER);
+    var size = this.getScreenNumericalValueDefault(sizeElem, 12);
     return ('' + (Math.floor(Math.round(size * 100) / 100)));
   };
   /**
@@ -5137,7 +5137,7 @@ var Shape = (function (_super) {
    */
   Shape.prototype.getAlignVertical = function () {
     var vertical = mxConstants.ALIGN_MIDDLE;
-    var align = parseInt(this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.VERTICAL_ALIGN), "1"));
+    var align = parseInt(this.getValue(this.getCellElement1Args(mxVsdxConstants.VERTICAL_ALIGN), "1"));
     if (align === 0) {
       vertical = mxConstants.ALIGN_TOP;
     }
@@ -5252,7 +5252,7 @@ var VsdxShape = (function (_super) {
     _this.rotation = _this.rotation % 360.0;
     var themeIndex = page.getCellIntValue("ThemeIndex", -100);
     if (themeIndex === -100) {
-      themeIndex = parseInt(_this.getValue(_this.getCellElement$java_lang_String("ThemeIndex"), "0"));
+      themeIndex = parseInt(_this.getValue(_this.getCellElement1Args("ThemeIndex"), "0"));
     }
     var theme = (function (m, k) {
       if (m.entries == null)
@@ -5282,14 +5282,14 @@ var VsdxShape = (function (_super) {
         }
       }
     }
-    _this.quickStyleVals = new mxTheme.QuickStyleVals(/* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleEffectsMatrix"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleFillColor"), "1")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleFillMatrix"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleFontColor"), "1")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleFontMatrix"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleLineColor"), "1")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleLineMatrix"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleShadowColor"), "1")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleType"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement$java_lang_String("QuickStyleVariation"), "0")));
+    _this.quickStyleVals = new mxTheme.QuickStyleVals(/* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleEffectsMatrix"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleFillColor"), "1")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleFillMatrix"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleFontColor"), "1")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleFontMatrix"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleLineColor"), "1")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleLineMatrix"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleShadowColor"), "1")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleType"), "0")), /* parseInt */ parseInt(_this.getValue(_this.getCellElement1Args("QuickStyleVariation"), "0")));
     if (_this.masterShape != null) {
       _this.masterShape.processGeomList(null);
       _this.processGeomList(_this.masterShape.getGeomList());
       if (_this.width === 0)
-        _this.width = _this.getScreenNumericalValue$org_w3c_dom_Element$double(_this.getCellElement$java_lang_String(mxVsdxConstants.WIDTH), 0);
+        _this.width = _this.getScreenNumericalValueDefault(_this.getCellElement1Args(mxVsdxConstants.WIDTH), 0);
       if (_this.height === 0)
-        _this.height = _this.getScreenNumericalValue$org_w3c_dom_Element$double(_this.getCellElement$java_lang_String(mxVsdxConstants.HEIGHT), 0);
+        _this.height = _this.getScreenNumericalValueDefault(_this.getCellElement1Args(mxVsdxConstants.HEIGHT), 0);
     }
     else {
       _this.processGeomList(null);
@@ -5302,32 +5302,32 @@ var VsdxShape = (function (_super) {
     return _this;
   }
 
-  VsdxShape.__static_initialize = function () {
-    if (!VsdxShape.__static_initialized) {
-      VsdxShape.__static_initialized = true;
-      VsdxShape.__static_initializer_0();
+  VsdxShape.initialize = function () {
+    if (!VsdxShape.initialized) {
+      VsdxShape.initialized = true;
+      VsdxShape.initializer_0();
     }
   };
-  VsdxShape.OFFSET_ARRAY_$LI$ = function () {
-    VsdxShape.__static_initialize();
+  VsdxShape.getOffsetArray = function () {
+    VsdxShape.initialize();
     if (VsdxShape.OFFSET_ARRAY == null)
       VsdxShape.OFFSET_ARRAY = (["Organizational unit", "Domain 3D"].slice(0).slice(0));
     return VsdxShape.OFFSET_ARRAY;
   };
   ;
-  VsdxShape.arrowSizes_$LI$ = function () {
-    VsdxShape.__static_initialize();
+  VsdxShape.getArrowSizes = function () {
+    VsdxShape.initialize();
     if (VsdxShape.arrowSizes == null)
       VsdxShape.arrowSizes = [2, 3, 5, 7, 9, 22, 45];
     return VsdxShape.arrowSizes;
   };
   ;
-  VsdxShape.arrowTypes_$LI$ = function () {
-    VsdxShape.__static_initialize();
+  VsdxShape.getArrowTypes = function () {
+    VsdxShape.initialize();
     return VsdxShape.arrowTypes;
   };
   ;
-  VsdxShape.__static_initializer_0 = function () {
+  VsdxShape.initializer_0 = function () {
 //            			mxResources.add("/js/vsdx/resources/edgeNameU");
 //            			mxResources.add("/js/vsdx/resources/nameU");
     VsdxShape.arrowTypes = ({});
@@ -5347,7 +5347,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 0, mxConstants.NONE);
+    })(VsdxShape.getArrowTypes(), 0, mxConstants.NONE);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5364,7 +5364,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 1, mxConstants.ARROW_OPEN);
+    })(VsdxShape.getArrowTypes(), 1, mxConstants.ARROW_OPEN);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5381,7 +5381,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 2, "blockThin");
+    })(VsdxShape.getArrowTypes(), 2, "blockThin");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5398,7 +5398,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 3, mxConstants.ARROW_OPEN);
+    })(VsdxShape.getArrowTypes(), 3, mxConstants.ARROW_OPEN);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5415,7 +5415,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 4, mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 4, mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5432,7 +5432,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 5, mxConstants.ARROW_CLASSIC);
+    })(VsdxShape.getArrowTypes(), 5, mxConstants.ARROW_CLASSIC);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5449,7 +5449,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 10, mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 10, mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5466,7 +5466,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 13, mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 13, mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5483,7 +5483,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 14, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 14, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5500,7 +5500,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 17, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_CLASSIC);
+    })(VsdxShape.getArrowTypes(), 17, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_CLASSIC);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5517,7 +5517,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 20, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 20, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5534,7 +5534,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 22, VsdxShape.ARROW_NO_FILL_MARKER + "diamond");
+    })(VsdxShape.getArrowTypes(), 22, VsdxShape.ARROW_NO_FILL_MARKER + "diamond");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5551,7 +5551,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 23, "dash");
+    })(VsdxShape.getArrowTypes(), 23, "dash");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5568,7 +5568,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 24, "ERone");
+    })(VsdxShape.getArrowTypes(), 24, "ERone");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5585,7 +5585,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 25, "ERmandOne");
+    })(VsdxShape.getArrowTypes(), 25, "ERmandOne");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5602,7 +5602,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 27, "ERmany");
+    })(VsdxShape.getArrowTypes(), 27, "ERmany");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5619,7 +5619,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 28, "ERoneToMany");
+    })(VsdxShape.getArrowTypes(), 28, "ERoneToMany");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5636,7 +5636,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 29, "ERzeroToMany");
+    })(VsdxShape.getArrowTypes(), 29, "ERzeroToMany");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5653,7 +5653,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 30, "ERzeroToOne");
+    })(VsdxShape.getArrowTypes(), 30, "ERzeroToOne");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5670,7 +5670,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 6, mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 6, mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5687,7 +5687,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 7, mxConstants.ARROW_OPEN);
+    })(VsdxShape.getArrowTypes(), 7, mxConstants.ARROW_OPEN);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5704,7 +5704,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 8, mxConstants.ARROW_CLASSIC);
+    })(VsdxShape.getArrowTypes(), 8, mxConstants.ARROW_CLASSIC);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5721,7 +5721,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 9, "openAsync");
+    })(VsdxShape.getArrowTypes(), 9, "openAsync");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5738,7 +5738,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 11, "diamond");
+    })(VsdxShape.getArrowTypes(), 11, "diamond");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5755,7 +5755,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 12, mxConstants.ARROW_OPEN);
+    })(VsdxShape.getArrowTypes(), 12, mxConstants.ARROW_OPEN);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5772,7 +5772,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 15, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 15, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5789,7 +5789,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 16, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 16, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5806,7 +5806,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 18, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 18, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5823,7 +5823,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 19, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_CLASSIC);
+    })(VsdxShape.getArrowTypes(), 19, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_CLASSIC);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5840,7 +5840,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 21, VsdxShape.ARROW_NO_FILL_MARKER + "diamond");
+    })(VsdxShape.getArrowTypes(), 21, VsdxShape.ARROW_NO_FILL_MARKER + "diamond");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5857,7 +5857,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 26, "ERmandOne");
+    })(VsdxShape.getArrowTypes(), 26, "ERmandOne");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5874,7 +5874,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 31, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 31, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5891,7 +5891,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 32, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 32, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5908,7 +5908,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 33, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 33, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5925,7 +5925,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 34, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 34, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5942,7 +5942,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 35, mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 35, mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5959,7 +5959,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 36, mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 36, mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5976,7 +5976,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 37, mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 37, mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -5993,7 +5993,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 38, mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 38, mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -6010,7 +6010,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 39, mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 39, mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -6027,7 +6027,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 40, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
+    })(VsdxShape.getArrowTypes(), 40, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_BLOCK);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -6044,7 +6044,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 41, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 41, VsdxShape.ARROW_NO_FILL_MARKER + mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -6061,7 +6061,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 42, mxConstants.ARROW_OVAL);
+    })(VsdxShape.getArrowTypes(), 42, mxConstants.ARROW_OVAL);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -6078,7 +6078,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 43, mxConstants.ARROW_OPEN);
+    })(VsdxShape.getArrowTypes(), 43, mxConstants.ARROW_OPEN);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -6095,7 +6095,7 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 44, mxConstants.ARROW_OPEN);
+    })(VsdxShape.getArrowTypes(), 44, mxConstants.ARROW_OPEN);
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -6112,15 +6112,8 @@ var VsdxShape = (function (_super) {
           return this.value;
         }
       });
-    })(VsdxShape.arrowTypes_$LI$(), 45, mxConstants.ARROW_OPEN);
+    })(VsdxShape.getArrowTypes(), 45, mxConstants.ARROW_OPEN);
   };
-  VsdxShape.__com_mxgraph_io_vsdx_VsdxShape_LOGGER_$LI$ = function () {
-    VsdxShape.__static_initialize();
-    if (VsdxShape.__com_mxgraph_io_vsdx_VsdxShape_LOGGER == null)
-      VsdxShape.__com_mxgraph_io_vsdx_VsdxShape_LOGGER = {};
-    return VsdxShape.__com_mxgraph_io_vsdx_VsdxShape_LOGGER;
-  };
-  ;
   /**
    * Locates the first entry for the specified attribute string in the shape hierarchy.
    * The order is to look locally, then delegate the request to the master shape
@@ -6133,7 +6126,7 @@ var VsdxShape = (function (_super) {
       return m[k] ? m[k] : null;
     })(this.cellElements, key);
     if (elem == null && this.masterShape != null) {
-      return this.masterShape.getCellElement$java_lang_String(key);
+      return this.masterShape.getCellElement1Args(key);
     }
     return elem;
   };
@@ -6143,7 +6136,7 @@ var VsdxShape = (function (_super) {
    * @return {string} Text label of the shape.
    */
   VsdxShape.prototype.getTextLabel = function () {
-    var hideText = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.HIDE_TEXT), "0");
+    var hideText = this.getValue(this.getCellElement1Args(mxVsdxConstants.HIDE_TEXT), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -6396,7 +6389,7 @@ var VsdxShape = (function (_super) {
   VsdxShape.prototype.processLblTxt = function (text) {
     text = mxVsdxUtils.htmlEntities(text);
     text = this.textToList(text, this.pp);
-    text = text.replace(new RegExp("\n", 'g'), "<br/>").replace(new RegExp(Shape.UNICODE_LINE_SEP_$LI$(), 'g'), "<br/>");
+    text = text.replace(new RegExp("\n", 'g'), "<br/>").replace(new RegExp(Shape.getUnicodeLineSep(), 'g'), "<br/>");
     return this.getTextCharFormated(text);
   };
   /**
@@ -6491,8 +6484,8 @@ var VsdxShape = (function (_super) {
     var py = this.getPinY();
     var lpy = this.getLocPinY();
     var lpx = this.getLocPinX();
-    var w = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.WIDTH), 0);
-    var h = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.HEIGHT), 0);
+    var w = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.WIDTH), 0);
+    var h = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.HEIGHT), 0);
     var x = px - lpx;
     var y = parentHeight - ((py) + (h - lpy));
     if (rotation && (lpy !== h / 2 || lpx !== w / 2)) {
@@ -6518,8 +6511,8 @@ var VsdxShape = (function (_super) {
    * @return {mxPoint} mxPoint that represents the dimensions of the shape.
    */
   VsdxShape.prototype.getDimensions = function () {
-    var w = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.WIDTH), 0);
-    var h = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.HEIGHT), 0);
+    var w = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.WIDTH), 0);
+    var h = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.HEIGHT), 0);
     return new mxPoint(w === 0 && h > 0 ? 1 : w, h === 0 && w > 0 ? 1 : h);
   };
   /**
@@ -6527,28 +6520,28 @@ var VsdxShape = (function (_super) {
    * @return {number} The shape pinX element
    */
   VsdxShape.prototype.getPinX = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.PIN_X), 0);
+    return this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.PIN_X), 0);
   };
   /**
    * Returns the value of the pinY element in pixels.
    * @return {number} Numerical value of the pinY element.
    */
   VsdxShape.prototype.getPinY = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.PIN_Y), 0);
+    return this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.PIN_Y), 0);
   };
   /**
    * Returns the value of the locPinX element in pixels.
    * @return {number} Numerical value of the pinY element.
    */
   VsdxShape.prototype.getLocPinX = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.LOC_PIN_X), 0);
+    return this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.LOC_PIN_X), 0);
   };
   /**
    * Returns the value of the locPinY element in pixels.
    * @return {number} Numerical value of the locPinY element.
    */
   VsdxShape.prototype.getLocPinY = function () {
-    return this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.LOC_PIN_Y), 0);
+    return this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.LOC_PIN_Y), 0);
   };
   /**
    * Returns the opacity of the Shape.<br/>
@@ -6562,7 +6555,7 @@ var VsdxShape = (function (_super) {
     if (this.isGroup()) {
       opacity = 0;
     }
-    opacity = this.getValueAsDouble(this.getCellElement$java_lang_String(key), 0);
+    opacity = this.getValueAsDouble(this.getCellElement1Args(key), 0);
     opacity = 100 - opacity * 100;
     opacity = Math.max(opacity, 0);
     opacity = Math.min(opacity, 100);
@@ -6576,7 +6569,7 @@ var VsdxShape = (function (_super) {
    */
   /*private*/
   VsdxShape.prototype.getGradient = function () {
-    var fillGradientEnabled = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.FILL_GRADIENT_ENABLED), "0");
+    var fillGradientEnabled = this.getValue(this.getCellElement1Args(mxVsdxConstants.FILL_GRADIENT_ENABLED), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -6596,9 +6589,9 @@ var VsdxShape = (function (_super) {
       }
     }
     var gradient = "";
-    var fillPattern = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.FILL_PATTERN), "0");
+    var fillPattern = this.getValue(this.getCellElement1Args(mxVsdxConstants.FILL_PATTERN), "0");
     if (parseInt(fillPattern) >= 25) {
-      gradient = this.getColor(this.getCellElement$java_lang_String(mxVsdxConstants.FILL_BKGND));
+      gradient = this.getColor(this.getCellElement1Args(mxVsdxConstants.FILL_BKGND));
     }
     else {
       var theme_11 = this.getTheme();
@@ -6619,7 +6612,7 @@ var VsdxShape = (function (_super) {
   /*private*/
   VsdxShape.prototype.getGradientDirection = function () {
     var direction = "";
-    var fillPattern = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.FILL_PATTERN), "0");
+    var fillPattern = this.getValue(this.getCellElement1Args(mxVsdxConstants.FILL_PATTERN), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -6667,7 +6660,7 @@ var VsdxShape = (function (_super) {
    * @return {number} Rotation of the shape in degrees.
    */
   VsdxShape.prototype.calcRotation = function () {
-    var rotation = parseFloat(this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.ANGLE), "0"));
+    var rotation = parseFloat(this.getValue(this.getCellElement1Args(mxVsdxConstants.ANGLE), "0"));
     rotation = (function (x) {
       return x * 180 / Math.PI;
     })(rotation);
@@ -6732,7 +6725,7 @@ var VsdxShape = (function (_super) {
   VsdxShape.prototype.getLabelRotation = function () {
     var hor = true;
     var rotation = this.calcRotation();
-    var angle = parseFloat(this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.TXT_ANGLE), "0"));
+    var angle = parseFloat(this.getValue(this.getCellElement1Args(mxVsdxConstants.TXT_ANGLE), "0"));
     angle = (function (x) {
       return x * 180 / Math.PI;
     })(angle);
@@ -6894,8 +6887,8 @@ var VsdxShape = (function (_super) {
       /* put */
       (this.styleMap[mxConstants.STYLE_DIRECTION] = direction);
     }
-    var flibX = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.FLIP_X), "0");
-    var flibY = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.FLIP_Y), "0");
+    var flibX = this.getValue(this.getCellElement1Args(mxVsdxConstants.FLIP_X), "0");
+    var flibY = this.getValue(this.getCellElement1Args(mxVsdxConstants.FLIP_Y), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -6924,7 +6917,7 @@ var VsdxShape = (function (_super) {
   /*private*/
   VsdxShape.prototype.getDashPattern = function () {
     var pattern = null;
-    var linePattern = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.LINE_PATTERN), "0");
+    var linePattern = this.getValue(this.getCellElement1Args(mxVsdxConstants.LINE_PATTERN), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -6935,7 +6928,7 @@ var VsdxShape = (function (_super) {
       })(linePattern, "Themed")) {
       var theme_12 = this.getTheme();
       if (theme_12 != null) {
-        pattern = this.isVertex() ? theme_12.getLineDashPattern$com_mxgraph_io_vsdx_theme_QuickStyleVals(this.getQuickStyleVals()) : theme_12.getConnLineDashPattern(this.getQuickStyleVals());
+        pattern = this.isVertex() ? theme_12.getLineDashPatternQuickStyleVals(this.getQuickStyleVals()) : theme_12.getConnLineDashPattern(this.getQuickStyleVals());
       }
     }
     else {
@@ -6969,7 +6962,7 @@ var VsdxShape = (function (_super) {
    * @return {boolean} Returns <code>true</code> if the lines of the shape are dashed.
    */
   VsdxShape.prototype.isDashed = function () {
-    var linePattern = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.LINE_PATTERN), "0");
+    var linePattern = this.getValue(this.getCellElement1Args(mxVsdxConstants.LINE_PATTERN), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -6980,7 +6973,7 @@ var VsdxShape = (function (_super) {
       })(linePattern, "Themed")) {
       var theme_13 = this.getTheme();
       if (theme_13 != null) {
-        return this.isVertex() ? theme_13.isLineDashed$com_mxgraph_io_vsdx_theme_QuickStyleVals(this.getQuickStyleVals()) : theme_13.isConnLineDashed(this.getQuickStyleVals());
+        return this.isVertex() ? theme_13.isLineDashedQuickStyleVals(this.getQuickStyleVals()) : theme_13.isConnLineDashed(this.getQuickStyleVals());
       }
     }
     else if (!((function (o1, o2) {
@@ -7008,7 +7001,7 @@ var VsdxShape = (function (_super) {
    * @return {number} Line width in pixels.
    */
   VsdxShape.prototype.getLineWidth = function () {
-    var lineWeight = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.LINE_WEIGHT), "1");
+    var lineWeight = this.getValue(this.getCellElement1Args(mxVsdxConstants.LINE_WEIGHT), "1");
     var lWeight = 1;
     try {
       if ((function (o1, o2) {
@@ -7021,12 +7014,12 @@ var VsdxShape = (function (_super) {
         })(lineWeight, "Themed")) {
         var theme_14 = this.getTheme();
         if (theme_14 != null) {
-          lWeight = (this.isVertex() ? theme_14.getLineWidth$com_mxgraph_io_vsdx_theme_QuickStyleVals(this.getQuickStyleVals()) : theme_14.getConnLineWidth(this.getQuickStyleVals())) / 10000.0;
+          lWeight = (this.isVertex() ? theme_14.getLineWidthQuickStyleVals(this.getQuickStyleVals()) : theme_14.getConnLineWidth(this.getQuickStyleVals())) / 10000.0;
         }
       }
       else {
         lWeight = parseFloat(lineWeight);
-        lWeight = this.getScreenNumericalValue$double(lWeight);
+        lWeight = this.getScreenNumericalValueDouble(lWeight);
       }
     }
     catch (e) {
@@ -7044,7 +7037,7 @@ var VsdxShape = (function (_super) {
    * @return {number} Size in pixels.
    */
   VsdxShape.prototype.getStartArrowSize = function () {
-    var baSize = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.BEGIN_ARROW_SIZE), "4");
+    var baSize = this.getValue(this.getCellElement1Args(mxVsdxConstants.BEGIN_ARROW_SIZE), "4");
     try {
       var size = 4;
       if ((function (o1, o2) {
@@ -7063,7 +7056,7 @@ var VsdxShape = (function (_super) {
       else {
         size = parseFloat(baSize);
       }
-      return VsdxShape.arrowSizes_$LI$()[size];
+      return VsdxShape.getArrowSizes()[size];
     }
     catch (e) {
     }
@@ -7077,7 +7070,7 @@ var VsdxShape = (function (_super) {
    * @return {number} Size in pixels.
    */
   VsdxShape.prototype.getFinalArrowSize = function () {
-    var eaSize = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.END_ARROW_SIZE), "4");
+    var eaSize = this.getValue(this.getCellElement1Args(mxVsdxConstants.END_ARROW_SIZE), "4");
     try {
       var size = 4;
       if ((function (o1, o2) {
@@ -7096,7 +7089,7 @@ var VsdxShape = (function (_super) {
       else {
         size = parseFloat(eaSize);
       }
-      return VsdxShape.arrowSizes_$LI$()[size];
+      return VsdxShape.getArrowSizes()[size];
     }
     catch (e) {
     }
@@ -7109,7 +7102,7 @@ var VsdxShape = (function (_super) {
    * @return {boolean} Returns <code>true</code> if the cell is Rounded.
    */
   VsdxShape.prototype.isRounded = function () {
-    var val = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.ROUNDING), "0");
+    var val = this.getValue(this.getCellElement1Args(mxVsdxConstants.ROUNDING), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -7128,7 +7121,7 @@ var VsdxShape = (function (_super) {
    * @return {boolean} Returns <code>mxVdxConstants.TRUE</code> if the line has shadow.
    */
   VsdxShape.prototype.isShadow = function () {
-    var shdw = this.getValue(this.getCellElement$java_lang_String(mxVsdxConstants.SHDW_PATTERN), "0");
+    var shdw = this.getValue(this.getCellElement1Args(mxVsdxConstants.SHDW_PATTERN), "0");
     if ((function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -7150,7 +7143,7 @@ var VsdxShape = (function (_super) {
     }
     return false;
   };
-  VsdxShape.prototype.getEdgeStyle$java_util_Map = function (edgeShape) {
+  VsdxShape.prototype.getEdgeStyleShape = function (edgeShape) {
     var result = ({});
     var edgeName = (function (m, k) {
       return m[k] ? m[k] : null;
@@ -7180,10 +7173,10 @@ var VsdxShape = (function (_super) {
    */
   VsdxShape.prototype.getEdgeStyle = function (edgeShape) {
     if (((edgeShape != null && (edgeShape instanceof Object)) || edgeShape === null)) {
-      return this.getEdgeStyle$java_util_Map(edgeShape);
+      return this.getEdgeStyleShape(edgeShape);
     }
     else if (edgeShape === undefined) {
-      return this.getEdgeStyle$();
+      return this.getEdgeStyleNone();
     }
     else
       throw new Error('invalid overload');
@@ -7647,7 +7640,7 @@ var VsdxShape = (function (_super) {
       }
     })(this.shapeName, "Subproces");
   };
-  VsdxShape.prototype.getEdgeStyle$ = function () {
+  VsdxShape.prototype.getEdgeStyleNone = function () {
     var result = ({});
     /* put */
     (result["edgeStyle"] = "none");
@@ -7827,8 +7820,8 @@ var VsdxShape = (function (_super) {
    * @return {mxPoint} mxPoint that represents the coordinates.
    */
   VsdxShape.prototype.getStartXY = function (parentHeight) {
-    var startX = Math.floor(Math.round(this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.BEGIN_X), 0) * 100) / 100);
-    var startY = Math.floor(Math.round((parentHeight - this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.BEGIN_Y), 0)) * 100) / 100);
+    var startX = Math.floor(Math.round(this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.BEGIN_X), 0) * 100) / 100);
+    var startY = Math.floor(Math.round((parentHeight - this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.BEGIN_Y), 0)) * 100) / 100);
     return new mxPoint(startX, startY);
   };
   /**
@@ -7837,8 +7830,8 @@ var VsdxShape = (function (_super) {
    * @return {mxPoint} mxPoint that represents the coordinates.
    */
   VsdxShape.prototype.getEndXY = function (parentHeight) {
-    var endX = Math.floor(Math.round(this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.END_X), 0) * 100) / 100);
-    var endY = Math.floor(Math.round((parentHeight - this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getCellElement$java_lang_String(mxVsdxConstants.END_Y), 0)) * 100) / 100);
+    var endX = Math.floor(Math.round(this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.END_X), 0) * 100) / 100);
+    var endY = Math.floor(Math.round((parentHeight - this.getScreenNumericalValueDefault(this.getCellElement1Args(mxVsdxConstants.END_Y), 0)) * 100) / 100);
     return new mxPoint(endX, endY);
   };
   /**
@@ -8043,7 +8036,7 @@ var VsdxShape = (function (_super) {
    * @return {*} style read from the edge shape.
    */
   VsdxShape.prototype.resolveCommonStyles = function () {
-    var lbkgnd = this.getTextBkgndColor(this.getCellElement$java_lang_String(mxVsdxConstants.TEXT_BKGND));
+    var lbkgnd = this.getTextBkgndColor(this.getCellElement1Args(mxVsdxConstants.TEXT_BKGND));
     if (!(function (o1, o2) {
         if (o1 && o1.equals) {
           return o1.equals(o2);
@@ -8065,7 +8058,7 @@ var VsdxShape = (function (_super) {
    * @param {boolean} start
    */
   VsdxShape.prototype.getEdgeMarker = function (start) {
-    var marker = this.getValue(this.getCellElement$java_lang_String(start ? mxVsdxConstants.BEGIN_ARROW : mxVsdxConstants.END_ARROW), "0");
+    var marker = this.getValue(this.getCellElement1Args(start ? mxVsdxConstants.BEGIN_ARROW : mxVsdxConstants.END_ARROW), "0");
     var val = 0;
     try {
       if ((function (o1, o2) {
@@ -8096,7 +8089,7 @@ var VsdxShape = (function (_super) {
           return m.entries[i].value;
         }
       return null;
-    })(VsdxShape.arrowTypes_$LI$(), val);
+    })(VsdxShape.getArrowTypes(), val);
     if (val > 0 && type == null) {
       type = (function (m, k) {
         if (m.entries == null)
@@ -8106,30 +8099,30 @@ var VsdxShape = (function (_super) {
             return m.entries[i].value;
           }
         return null;
-      })(VsdxShape.arrowTypes_$LI$(), 1);
+      })(VsdxShape.getArrowTypes(), 1);
     }
     return type;
   };
-  VsdxShape.prototype.getCellElement$java_lang_String = function (key) {
-    var elem = _super.prototype.getCellElement$java_lang_String.call(this, key);
+  VsdxShape.prototype.getCellElement1Args = function (key) {
+    var elem = _super.prototype.getCellElement1Args.call(this, key);
     if (elem == null && this.masterShape != null) {
-      return this.masterShape.getCellElement$java_lang_String(key);
+      return this.masterShape.getCellElement1Args(key);
     }
     return elem;
   };
-  VsdxShape.prototype.getCellElement$java_lang_String$java_lang_String$java_lang_String = function (cellKey, index, sectKey) {
-    var elem = _super.prototype.getCellElement$java_lang_String$java_lang_String$java_lang_String.call(this, cellKey, index, sectKey);
+  VsdxShape.prototype.getCellElement3Args = function (cellKey, index, sectKey) {
+    var elem = _super.prototype.getCellElement3Args.call(this, cellKey, index, sectKey);
     if (elem == null && this.masterShape != null) {
-      return this.masterShape.getCellElement$java_lang_String$java_lang_String$java_lang_String(cellKey, index, sectKey);
+      return this.masterShape.getCellElement3Args(cellKey, index, sectKey);
     }
     return elem;
   };
   VsdxShape.prototype.getCellElement = function (cellKey, index, sectKey) {
     if (((typeof cellKey === 'string') || cellKey === null) && ((typeof index === 'string') || index === null) && ((typeof sectKey === 'string') || sectKey === null)) {
-      return this.getCellElement$java_lang_String$java_lang_String$java_lang_String(cellKey, index, sectKey);
+      return this.getCellElement3Args(cellKey, index, sectKey);
     }
     else if (((typeof cellKey === 'string') || cellKey === null) && index === undefined && sectKey === undefined) {
-      return this.getCellElement$java_lang_String(cellKey);
+      return this.getCellElement1Args(cellKey);
     }
     else
       throw new Error('invalid overload');
@@ -8143,12 +8136,12 @@ var VsdxShape = (function (_super) {
    * @return {mxCell} label sub-shape
    */
   VsdxShape.prototype.createLabelSubShape = function (graph, parent) {
-    var txtWV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_WIDTH), this.getWidth());
-    var txtHV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_HEIGHT), this.getHeight());
-    var txtLocPinXV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_LOC_PIN_X), txtWV / 2.0);
-    var txtLocPinYV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_LOC_PIN_Y), txtHV / 2.0);
-    var txtPinXV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_PIN_X), txtLocPinXV);
-    var txtPinYV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_PIN_Y), txtLocPinYV);
+    var txtWV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_WIDTH), this.getWidth());
+    var txtHV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_HEIGHT), this.getHeight());
+    var txtLocPinXV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_LOC_PIN_X), txtWV / 2.0);
+    var txtLocPinYV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_LOC_PIN_Y), txtHV / 2.0);
+    var txtPinXV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_PIN_X), txtLocPinXV);
+    var txtPinYV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_PIN_Y), txtLocPinYV);
     var txtAngleV = this.getValueAsDouble(this.getShapeNode(mxVsdxConstants.TXT_ANGLE), 0);
     var textLabel = this.getTextLabel();
     if (textLabel != null && !(textLabel.length === 0)) {
@@ -8209,12 +8202,12 @@ var VsdxShape = (function (_super) {
       var mxOffset = view.getPoint(state);
       var p0 = points[0];
       var pe = points[points.length - 1];
-      var txtWV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_WIDTH), this.getWidth());
-      var txtHV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_HEIGHT), this.getHeight());
-      var txtLocPinXV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_LOC_PIN_X), 0);
-      var txtLocPinYV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_LOC_PIN_Y), 0);
-      var txtPinXV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_PIN_X), 0);
-      var txtPinYV = this.getScreenNumericalValue$org_w3c_dom_Element$double(this.getShapeNode(mxVsdxConstants.TXT_PIN_Y), 0);
+      var txtWV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_WIDTH), this.getWidth());
+      var txtHV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_HEIGHT), this.getHeight());
+      var txtLocPinXV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_LOC_PIN_X), 0);
+      var txtLocPinYV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_LOC_PIN_Y), 0);
+      var txtPinXV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_PIN_X), 0);
+      var txtPinYV = this.getScreenNumericalValueDefault(this.getShapeNode(mxVsdxConstants.TXT_PIN_Y), 0);
       var y = (this.getHeight() - (p0.y - pe.y)) / 2 + p0.y - mxOffset.y - (txtPinYV - txtLocPinYV + txtHV / 2);
       var x = txtPinXV - txtLocPinXV + txtWV / 2 + (p0.x - mxOffset.x);
       //FIXME one file has txtPinX/Y values extremely high which cause draw.io to hang
@@ -8234,7 +8227,7 @@ var VsdxShape = (function (_super) {
   VsdxShape.prototype.setShapeIndex = function (shapeIndex) {
     this.shapeIndex = shapeIndex;
   };
-  VsdxShape.__static_initialized = false;
+  VsdxShape.initialized = false;
   VsdxShape.ARROW_NO_FILL_MARKER = "0";
   VsdxShape.maxDp = 2;
 //TODO FIXME In online, matching fails which gives better results!
@@ -8302,68 +8295,68 @@ var mxPropertiesManager = (function () {
     this.fontElementMap = ({});
   }
 
-  mxPropertiesManager.__static_initialize = function () {
-    if (!mxPropertiesManager.__static_initialized) {
-      mxPropertiesManager.__static_initialized = true;
-      mxPropertiesManager.__static_initializer_0();
+  mxPropertiesManager.initialize = function () {
+    if (!mxPropertiesManager.initialized) {
+      mxPropertiesManager.initialized = true;
+      mxPropertiesManager.initializer_0();
     }
   };
-  mxPropertiesManager.defaultColors_$LI$ = function () {
-    mxPropertiesManager.__static_initialize();
+  mxPropertiesManager.getDefaultColors = function () {
+    mxPropertiesManager.initialize();
     if (mxPropertiesManager.defaultColors == null)
       mxPropertiesManager.defaultColors = ({});
     return mxPropertiesManager.defaultColors;
   };
   ;
-  mxPropertiesManager.__static_initializer_0 = function () {
+  mxPropertiesManager.initializer_0 = function () {
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["0"] = "#000000");
+    (mxPropertiesManager.getDefaultColors()["0"] = "#000000");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["1"] = "#FFFFFF");
+    (mxPropertiesManager.getDefaultColors()["1"] = "#FFFFFF");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["2"] = "#FF0000");
+    (mxPropertiesManager.getDefaultColors()["2"] = "#FF0000");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["3"] = "#00FF00");
+    (mxPropertiesManager.getDefaultColors()["3"] = "#00FF00");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["4"] = "#0000FF");
+    (mxPropertiesManager.getDefaultColors()["4"] = "#0000FF");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["5"] = "#FFFF00");
+    (mxPropertiesManager.getDefaultColors()["5"] = "#FFFF00");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["6"] = "#FF00FF");
+    (mxPropertiesManager.getDefaultColors()["6"] = "#FF00FF");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["7"] = "#00FFFF");
+    (mxPropertiesManager.getDefaultColors()["7"] = "#00FFFF");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["8"] = "#800000");
+    (mxPropertiesManager.getDefaultColors()["8"] = "#800000");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["9"] = "#008000");
+    (mxPropertiesManager.getDefaultColors()["9"] = "#008000");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["10"] = "#000080");
+    (mxPropertiesManager.getDefaultColors()["10"] = "#000080");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["11"] = "#808000");
+    (mxPropertiesManager.getDefaultColors()["11"] = "#808000");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["12"] = "#800080");
+    (mxPropertiesManager.getDefaultColors()["12"] = "#800080");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["13"] = "#008080");
+    (mxPropertiesManager.getDefaultColors()["13"] = "#008080");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["14"] = "#C0C0C0");
+    (mxPropertiesManager.getDefaultColors()["14"] = "#C0C0C0");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["15"] = "#E6E6E6");
+    (mxPropertiesManager.getDefaultColors()["15"] = "#E6E6E6");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["16"] = "#CDCDCD");
+    (mxPropertiesManager.getDefaultColors()["16"] = "#CDCDCD");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["17"] = "#B3B3B3");
+    (mxPropertiesManager.getDefaultColors()["17"] = "#B3B3B3");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["18"] = "#9A9A9A");
+    (mxPropertiesManager.getDefaultColors()["18"] = "#9A9A9A");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["19"] = "#808080");
+    (mxPropertiesManager.getDefaultColors()["19"] = "#808080");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["20"] = "#666666");
+    (mxPropertiesManager.getDefaultColors()["20"] = "#666666");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["21"] = "#4D4D4D");
+    (mxPropertiesManager.getDefaultColors()["21"] = "#4D4D4D");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["22"] = "#333333");
+    (mxPropertiesManager.getDefaultColors()["22"] = "#333333");
     /* put */
-    (mxPropertiesManager.defaultColors_$LI$()["23"] = "#1A1A1A");
+    (mxPropertiesManager.getDefaultColors()["23"] = "#1A1A1A");
   };
   /**
    * Loads the properties of the document.
@@ -8415,7 +8408,7 @@ var mxPropertiesManager = (function () {
     if (color == null) {
       color = (function (m, k) {
         return m[k] ? m[k] : null;
-      })(mxPropertiesManager.defaultColors_$LI$(), ix);
+      })(mxPropertiesManager.getDefaultColors(), ix);
       if (color == null) {
         return "";
       }
@@ -8438,7 +8431,7 @@ var mxPropertiesManager = (function () {
       return font;
     }
   };
-  mxPropertiesManager.__static_initialized = false;
+  mxPropertiesManager.initialized = false;
   return mxPropertiesManager;
 }());
 
@@ -8454,7 +8447,7 @@ var mxTheme = {
       this.blue = blue;
     }
 
-    Color.NONE_$LI$ = function () {
+    Color.getNone = function () {
       if (Color.NONE == null)
         Color.NONE = new Color(-1, -1, -1);
       return Color.NONE;
@@ -8608,8 +8601,8 @@ var mxTheme = {
      * @return {mxTheme.Color}
      */
     GradFill.prototype.applyStyle = function (styleValue, theme) {
-      var color = this.color1.getColor$int$com_mxgraph_io_vsdx_mxVsdxTheme(styleValue, theme);
-      color.setGradientClr(this.color2.getColor$int$com_mxgraph_io_vsdx_mxVsdxTheme(styleValue, theme));
+      var color = this.color1.getColorIntVsdxTheme(styleValue, theme);
+      color.setGradientClr(this.color2.getColorIntVsdxTheme(styleValue, theme));
       return color;
     };
     return GradFill;
@@ -8828,7 +8821,7 @@ var mxTheme = {
         })();
 
         (function () {
-          _this.lineWidth = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(elem, "w");
+          _this.lineWidth = mxVsdxUtils.getIntAttrFromString(elem, "w");
           var lineCapAtt = elem.getAttribute("cap");
           if (lineCapAtt != null) {
             switch ((lineCapAtt)) {
@@ -8942,8 +8935,8 @@ var mxTheme = {
                   for (var index154 = 0; index154 < dsElems.length; index154++) {
                     var dsElem = dsElems[index154];
                     {
-                      var dashLen = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(dsElem, "d");
-                      var spaceLen = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(dsElem, "sp");
+                      var dashLen = mxVsdxUtils.getIntAttrFromString(dsElem, "d");
+                      var spaceLen = mxVsdxUtils.getIntAttrFromString(dsElem, "sp");
                       /* add */
                       (_this.lineDashPattern.push(dashLen / 10000.0) > 0);
                       /* add */
@@ -8958,18 +8951,18 @@ var mxTheme = {
                   _this.isBevelJoin = true;
                   break;
                 case "a:miter":
-                  var limit = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(subElem, "lim");
+                  var limit = mxVsdxUtils.getIntAttrFromString(subElem, "lim");
                   _this.isMiterJoin = true;
                   break;
                 case "a:headEnd":
                   _this.headEndType = _this.getLineEndType(subElem);
-                  _this.headEndWidth = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(subElem, "w");
-                  _this.headEndLen = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(subElem, "len");
+                  _this.headEndWidth = mxVsdxUtils.getIntAttrFromString(subElem, "w");
+                  _this.headEndLen = mxVsdxUtils.getIntAttrFromString(subElem, "len");
                   break;
                 case "a:tailEnd":
                   _this.tailEndType = _this.getLineEndType(subElem);
-                  _this.tailEndWidth = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(subElem, "w");
-                  _this.tailEndLen = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(subElem, "len");
+                  _this.tailEndWidth = mxVsdxUtils.getIntAttrFromString(subElem, "w");
+                  _this.tailEndLen = mxVsdxUtils.getIntAttrFromString(subElem, "len");
                   break;
                 case "a:extLst":
                   break;
@@ -9080,12 +9073,12 @@ var mxTheme = {
       this.pattern = 0;
       this.lineDashPattern = null;
       var lineEx = mxVsdxUtils.getDirectFirstChildElement(elem);
-      this.rndg = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(lineEx, "rndg");
-      this.start = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(lineEx, "start");
-      this.startSize = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(lineEx, "startSize");
-      this.end = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(lineEx, "end");
-      this.endSize = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(lineEx, "endSize");
-      this.pattern = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(lineEx, "pattern");
+      this.rndg = mxVsdxUtils.getIntAttrFromString(lineEx, "rndg");
+      this.start = mxVsdxUtils.getIntAttrFromString(lineEx, "start");
+      this.startSize = mxVsdxUtils.getIntAttrFromString(lineEx, "startSize");
+      this.end = mxVsdxUtils.getIntAttrFromString(lineEx, "end");
+      this.endSize = mxVsdxUtils.getIntAttrFromString(lineEx, "endSize");
+      this.pattern = mxVsdxUtils.getIntAttrFromString(lineEx, "pattern");
       this.lineDashPattern = Style.getLineDashPattern(this.pattern);
     }
 
@@ -9123,7 +9116,7 @@ var mxTheme = {
      * @return {mxTheme.Color}
      */
     NoFillStyle.prototype.applyStyle = function (styleValue, theme) {
-      return mxTheme.Color.NONE_$LI$();
+      return mxTheme.Color.getNone();
     };
     return NoFillStyle;
   }()),
@@ -9212,7 +9205,7 @@ var mxTheme = {
         this.color = hsvColor.toRgb();
       }
     };
-    OoxmlColor.prototype.getColor$int$com_mxgraph_io_vsdx_mxVsdxTheme = function (styleColor, theme) {
+    OoxmlColor.prototype.getColorIntVsdxTheme = function (styleColor, theme) {
       if (this.isDynamic || !this.isInitialized) {
         this.calcColor(styleColor, theme);
         this.isInitialized = true;
@@ -9221,16 +9214,16 @@ var mxTheme = {
     };
     OoxmlColor.prototype.getColor = function (styleColor, theme) {
       if (((typeof styleColor === 'number') || styleColor === null) && ((theme != null && theme instanceof mxVsdxTheme) || theme === null)) {
-        return this.getColor$int$com_mxgraph_io_vsdx_mxVsdxTheme(styleColor, theme);
+        return this.getColorIntVsdxTheme(styleColor, theme);
       }
       else if (((styleColor != null && styleColor instanceof mxVsdxTheme) || styleColor === null) && theme === undefined) {
-        return this.getColor$com_mxgraph_io_vsdx_mxVsdxTheme(styleColor);
+        return this.getColorVsdxTheme(styleColor);
       }
       else
         throw new Error('invalid overload');
     };
-    OoxmlColor.prototype.getColor$com_mxgraph_io_vsdx_mxVsdxTheme = function (theme) {
-      return this.getColor$int$com_mxgraph_io_vsdx_mxVsdxTheme(-1, theme);
+    OoxmlColor.prototype.getColorVsdxTheme = function (theme) {
+      return this.getColorIntVsdxTheme(-1, theme);
     };
     OoxmlColor.prototype.setTint = function (tint) {
       this.tint = tint;
@@ -9501,7 +9494,7 @@ var mxTheme = {
      * @return {mxTheme.Color}
      */
     SolidFillStyle.prototype.applyStyle = function (styleValue, theme) {
-      return this.color.getColor$int$com_mxgraph_io_vsdx_mxVsdxTheme(styleValue, theme);
+      return this.color.getColorIntVsdxTheme(styleValue, theme);
     };
     return SolidFillStyle;
   }())
@@ -9510,12 +9503,12 @@ mxTheme.HslClr = (function (_super) {
   __extends(HslClr, _super);
   function HslClr(hue, sat, lum) {
     var _this = _super.call(this) || this;
-    _this.__com_mxgraph_io_vsdx_theme_HslClr_hue = 0;
-    _this.__com_mxgraph_io_vsdx_theme_HslClr_sat = 0;
-    _this.__com_mxgraph_io_vsdx_theme_HslClr_lum = 0;
-    _this.__com_mxgraph_io_vsdx_theme_HslClr_hue = hue / 360.0;
-    _this.__com_mxgraph_io_vsdx_theme_HslClr_sat = sat / 100.0;
-    _this.__com_mxgraph_io_vsdx_theme_HslClr_lum = lum / 100.0;
+    _this.HslClr_hue = 0;
+    _this.HslClr_sat = 0;
+    _this.HslClr_lum = 0;
+    _this.HslClr_hue = hue / 360.0;
+    _this.HslClr_sat = sat / 100.0;
+    _this.HslClr_lum = lum / 100.0;
     _this.color = new mxTheme.HSLColor(hue, sat, lum).toRgb();
     return _this;
   }
@@ -9748,88 +9741,88 @@ var mxVsdxTheme = (function () {
     this.name = theme.getAttribute("name") || "";
     var themeId = (function (m, k) {
       return m[k] ? m[k] : null;
-    })(mxVsdxTheme.themesIds_$LI$(), this.name);
+    })(mxVsdxTheme.getThemesIds(), this.name);
     if (themeId != null) {
       this.themeIndex = themeId;
     }
   }
 
-  mxVsdxTheme.__static_initialize = function () {
-    if (!mxVsdxTheme.__static_initialized) {
-      mxVsdxTheme.__static_initialized = true;
-      mxVsdxTheme.__static_initializer_0();
-      mxVsdxTheme.__static_initializer_1();
+  mxVsdxTheme.initialize = function () {
+    if (!mxVsdxTheme.initialized) {
+      mxVsdxTheme.initialized = true;
+      mxVsdxTheme.initializer_0();
+      mxVsdxTheme.initializer_1();
     }
   };
-  mxVsdxTheme.themesIds_$LI$ = function () {
-    mxVsdxTheme.__static_initialize();
+  mxVsdxTheme.getThemesIds = function () {
+    mxVsdxTheme.initialize();
     if (mxVsdxTheme.themesIds == null)
       mxVsdxTheme.themesIds = ({});
     return mxVsdxTheme.themesIds;
   };
   ;
-  mxVsdxTheme.__static_initializer_0 = function () {
+  mxVsdxTheme.initializer_0 = function () {
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Office"] = 33);
+    (mxVsdxTheme.getThemesIds()["Office"] = 33);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Linear"] = 34);
+    (mxVsdxTheme.getThemesIds()["Linear"] = 34);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Zephyr"] = 35);
+    (mxVsdxTheme.getThemesIds()["Zephyr"] = 35);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Integral"] = 36);
+    (mxVsdxTheme.getThemesIds()["Integral"] = 36);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Simple"] = 37);
+    (mxVsdxTheme.getThemesIds()["Simple"] = 37);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Whisp"] = 38);
+    (mxVsdxTheme.getThemesIds()["Whisp"] = 38);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Daybreak"] = 39);
+    (mxVsdxTheme.getThemesIds()["Daybreak"] = 39);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Parallel"] = 40);
+    (mxVsdxTheme.getThemesIds()["Parallel"] = 40);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Sequence"] = 41);
+    (mxVsdxTheme.getThemesIds()["Sequence"] = 41);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Slice"] = 42);
+    (mxVsdxTheme.getThemesIds()["Slice"] = 42);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Ion"] = 43);
+    (mxVsdxTheme.getThemesIds()["Ion"] = 43);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Retrospect"] = 44);
+    (mxVsdxTheme.getThemesIds()["Retrospect"] = 44);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Organic"] = 45);
+    (mxVsdxTheme.getThemesIds()["Organic"] = 45);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Bubble"] = 46);
+    (mxVsdxTheme.getThemesIds()["Bubble"] = 46);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Clouds"] = 47);
+    (mxVsdxTheme.getThemesIds()["Clouds"] = 47);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Gemstone"] = 48);
+    (mxVsdxTheme.getThemesIds()["Gemstone"] = 48);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Lines"] = 49);
+    (mxVsdxTheme.getThemesIds()["Lines"] = 49);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Facet"] = 50);
+    (mxVsdxTheme.getThemesIds()["Facet"] = 50);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Prominence"] = 51);
+    (mxVsdxTheme.getThemesIds()["Prominence"] = 51);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Smoke"] = 52);
+    (mxVsdxTheme.getThemesIds()["Smoke"] = 52);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Radiance"] = 53);
+    (mxVsdxTheme.getThemesIds()["Radiance"] = 53);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Shade"] = 54);
+    (mxVsdxTheme.getThemesIds()["Shade"] = 54);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Pencil"] = 55);
+    (mxVsdxTheme.getThemesIds()["Pencil"] = 55);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Pen"] = 56);
+    (mxVsdxTheme.getThemesIds()["Pen"] = 56);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Marker"] = 57);
+    (mxVsdxTheme.getThemesIds()["Marker"] = 57);
     /* put */
-    (mxVsdxTheme.themesIds_$LI$()["Whiteboard"] = 58);
+    (mxVsdxTheme.getThemesIds()["Whiteboard"] = 58);
   };
-  mxVsdxTheme.colorIds_$LI$ = function () {
-    mxVsdxTheme.__static_initialize();
+  mxVsdxTheme.getColorIds = function () {
+    mxVsdxTheme.initialize();
     if (mxVsdxTheme.colorIds == null)
       mxVsdxTheme.colorIds = ({});
     return mxVsdxTheme.colorIds;
   };
   ;
-  mxVsdxTheme.__static_initializer_1 = function () {
+  mxVsdxTheme.initializer_1 = function () {
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -9846,7 +9839,7 @@ var mxVsdxTheme = (function () {
           return this.value;
         }
       });
-    })(mxVsdxTheme.colorIds_$LI$(), 0, "dk1");
+    })(mxVsdxTheme.getColorIds(), 0, "dk1");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -9863,7 +9856,7 @@ var mxVsdxTheme = (function () {
           return this.value;
         }
       });
-    })(mxVsdxTheme.colorIds_$LI$(), 1, "lt1");
+    })(mxVsdxTheme.getColorIds(), 1, "lt1");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -9880,7 +9873,7 @@ var mxVsdxTheme = (function () {
           return this.value;
         }
       });
-    })(mxVsdxTheme.colorIds_$LI$(), 2, "accent1");
+    })(mxVsdxTheme.getColorIds(), 2, "accent1");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -9897,7 +9890,7 @@ var mxVsdxTheme = (function () {
           return this.value;
         }
       });
-    })(mxVsdxTheme.colorIds_$LI$(), 3, "accent2");
+    })(mxVsdxTheme.getColorIds(), 3, "accent2");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -9914,7 +9907,7 @@ var mxVsdxTheme = (function () {
           return this.value;
         }
       });
-    })(mxVsdxTheme.colorIds_$LI$(), 4, "accent3");
+    })(mxVsdxTheme.getColorIds(), 4, "accent3");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -9931,7 +9924,7 @@ var mxVsdxTheme = (function () {
           return this.value;
         }
       });
-    })(mxVsdxTheme.colorIds_$LI$(), 5, "accent4");
+    })(mxVsdxTheme.getColorIds(), 5, "accent4");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -9948,7 +9941,7 @@ var mxVsdxTheme = (function () {
           return this.value;
         }
       });
-    })(mxVsdxTheme.colorIds_$LI$(), 6, "accent5");
+    })(mxVsdxTheme.getColorIds(), 6, "accent5");
     /* put */
     (function (m, k, v) {
       if (m.entries == null)
@@ -9965,7 +9958,7 @@ var mxVsdxTheme = (function () {
           return this.value;
         }
       });
-    })(mxVsdxTheme.colorIds_$LI$(), 7, "accent6");
+    })(mxVsdxTheme.getColorIds(), 7, "accent6");
   };
   mxVsdxTheme.prototype.getThemeIndex = function () {
     return this.themeIndex;
@@ -10183,16 +10176,16 @@ var mxVsdxTheme = (function () {
             for (var index142 = 0; index142 < varStyleSchemes.length; index142++) {
               var varStyleScheme = varStyleSchemes[index142];
               {
-                this.variantEmbellishment[i] = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(varStyleScheme, "embellishment");
+                this.variantEmbellishment[i] = mxVsdxUtils.getIntAttrFromString(varStyleScheme, "embellishment");
                 var varStyles = mxVsdxUtils.getDirectChildElements(varStyleScheme);
                 var j = 0;
                 for (var index143 = 0; index143 < varStyles.length; index143++) {
                   var varStyle = varStyles[index143];
                   {
-                    this.variantFillIdx[i][j] = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(varStyle, "fillIdx");
-                    this.variantLineIdx[i][j] = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(varStyle, "lineIdx");
-                    this.variantEffectIdx[i][j] = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(varStyle, "effectIdx");
-                    this.variantFontIdx[i][j] = mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(varStyle, "fontIdx");
+                    this.variantFillIdx[i][j] = mxVsdxUtils.getIntAttrFromString(varStyle, "fillIdx");
+                    this.variantLineIdx[i][j] = mxVsdxUtils.getIntAttrFromString(varStyle, "lineIdx");
+                    this.variantEffectIdx[i][j] = mxVsdxUtils.getIntAttrFromString(varStyle, "effectIdx");
+                    this.variantFontIdx[i][j] = mxVsdxUtils.getIntAttrFromString(varStyle, "fontIdx");
                     j++;
                   }
                 }
@@ -10211,7 +10204,7 @@ var mxVsdxTheme = (function () {
       var fontProp = fontProps[index144];
       {
         /* add */
-        (fontStyles.push(mxVsdxUtils.getIntAttr$org_w3c_dom_Element$java_lang_String(fontProp, "style")) > 0);
+        (fontStyles.push(mxVsdxUtils.getIntAttrFromString(fontProp, "style")) > 0);
         var color = mxVsdxUtils.getDirectFirstChildElement(fontProp);
         if (color != null)
           (fontColors.push(mxTheme.OoxmlColorFactory.getOoxmlColor(mxVsdxUtils.getDirectFirstChildElement(color))) > 0);
@@ -10364,7 +10357,7 @@ var mxVsdxTheme = (function () {
     var color = (function (m, k) {
       return m[k] ? m[k] : null;
     })(this.baseColors, val);
-    return color != null ? color.getColor$com_mxgraph_io_vsdx_mxVsdxTheme(this) : this.defaultClr;
+    return color != null ? color.getColorVsdxTheme(this) : this.defaultClr;
   };
   mxVsdxTheme.prototype.getStyleColor = function (styleColor) {
     this.processTheme();
@@ -10379,14 +10372,14 @@ var mxVsdxTheme = (function () {
             return m.entries[i].value;
           }
         return null;
-      })(mxVsdxTheme.colorIds_$LI$(), styleColor));
+      })(mxVsdxTheme.getColorIds(), styleColor));
       if (color != null) {
-        return color.getColor$com_mxgraph_io_vsdx_mxVsdxTheme(this);
+        return color.getColorVsdxTheme(this);
       }
     }
     else if (styleColor === 8) {
       if (this.bkgndColor != null) {
-        return this.bkgndColor.getColor$com_mxgraph_io_vsdx_mxVsdxTheme(this);
+        return this.bkgndColor.getColorVsdxTheme(this);
       }
     }
     else {
@@ -10402,18 +10395,18 @@ var mxVsdxTheme = (function () {
         color = this.variantsColors[this.themeVariant][clrIndex];
       }
       if (color != null) {
-        return color.getColor$com_mxgraph_io_vsdx_mxVsdxTheme(this);
+        return color.getColorVsdxTheme(this);
       }
     }
     return this.defaultClr;
   };
   mxVsdxTheme.prototype.getFillGraientColor = function (quickStyleVals) {
-    return this.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$boolean(quickStyleVals, true);
+    return this.getFillColorQuickStyleValsGradient(quickStyleVals, true);
   };
-  mxVsdxTheme.prototype.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals = function (quickStyleVals) {
-    return this.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$boolean(quickStyleVals, false);
+  mxVsdxTheme.prototype.getFillColorQuickStyleVals = function (quickStyleVals) {
+    return this.getFillColorQuickStyleValsGradient(quickStyleVals, false);
   };
-  mxVsdxTheme.prototype.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$boolean = function (quickStyleVals, getGradient) {
+  mxVsdxTheme.prototype.getFillColorQuickStyleValsGradient = function (quickStyleVals, getGradient) {
     this.processTheme();
     var fillColorStyle = quickStyleVals.getQuickStyleFillColor();
     var fillStyle = null;
@@ -10455,16 +10448,16 @@ var mxVsdxTheme = (function () {
     }
     var styleVariation = quickStyleVals.getQuickStyleVariation();
     if (retColor != null && (styleVariation & 8) > 0) {
-      retColor = this.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      retColor = this.getLineColorQuickStyleVals(quickStyleVals);
     }
     return retColor;
   };
   mxVsdxTheme.prototype.getFillColor = function (quickStyleVals, getGradient) {
     if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && ((typeof getGradient === 'boolean') || getGradient === null)) {
-      return this.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$boolean(quickStyleVals, getGradient);
+      return this.getFillColorQuickStyleValsGradient(quickStyleVals, getGradient);
     }
     else if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && getGradient === undefined) {
-      return this.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      return this.getFillColorQuickStyleVals(quickStyleVals);
     }
     else
       throw new Error('invalid overload');
@@ -10514,7 +10507,7 @@ var mxVsdxTheme = (function () {
     }
     return lineStyleExt;
   };
-  mxVsdxTheme.prototype.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList = function (quickStyleVals, lineStyles) {
+  mxVsdxTheme.prototype.getLineColorQuickStyleValsArrayList = function (quickStyleVals, lineStyles) {
     this.processTheme();
     var lineColorStyle = quickStyleVals.getQuickStyleLineColor();
     var lineStyle = this.getLineStyle(quickStyleVals.getQuickStyleLineMatrix(), lineStyles);
@@ -10536,30 +10529,30 @@ var mxVsdxTheme = (function () {
     }
     var styleVariation = quickStyleVals.getQuickStyleVariation();
     if ((styleVariation & 4) > 0) {
-      lineClr = this.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      lineClr = this.getFillColorQuickStyleVals(quickStyleVals);
     }
     return lineClr;
   };
   mxVsdxTheme.prototype.getLineColor = function (quickStyleVals, lineStyles) {
     if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && ((lineStyles != null && (lineStyles instanceof Array)) || lineStyles === null)) {
-      return this.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, lineStyles);
+      return this.getLineColorQuickStyleValsArrayList(quickStyleVals, lineStyles);
     }
     else if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && lineStyles === undefined) {
-      return this.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      return this.getLineColorQuickStyleVals(quickStyleVals);
     }
     else
       throw new Error('invalid overload');
   };
-  mxVsdxTheme.prototype.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals = function (quickStyleVals) {
-    return this.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, this.lineStyles);
+  mxVsdxTheme.prototype.getLineColorQuickStyleVals = function (quickStyleVals) {
+    return this.getLineColorQuickStyleValsArrayList(quickStyleVals, this.lineStyles);
   };
   mxVsdxTheme.prototype.getConnLineColor = function (quickStyleVals) {
-    return this.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, this.connLineStyles);
+    return this.getLineColorQuickStyleValsArrayList(quickStyleVals, this.connLineStyles);
   };
   mxVsdxTheme.prototype.getDefaultLineClr = function () {
     return this.defaultLineClr;
   };
-  mxVsdxTheme.prototype.isLineDashed$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList$java_util_ArrayList = function (quickStyleVals, lineStylesExt, lineStyles) {
+  mxVsdxTheme.prototype.isLineDashedQuickStyleValsArrayList = function (quickStyleVals, lineStylesExt, lineStyles) {
     var lineStyleExt = this.getLineStyleExt(quickStyleVals.getQuickStyleLineMatrix(), lineStylesExt);
     if (lineStyleExt != null) {
       return lineStyleExt.isDashed();
@@ -10571,21 +10564,21 @@ var mxVsdxTheme = (function () {
   };
   mxVsdxTheme.prototype.isLineDashed = function (quickStyleVals, lineStylesExt, lineStyles) {
     if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && ((lineStylesExt != null && (lineStylesExt instanceof Array)) || lineStylesExt === null) && ((lineStyles != null && (lineStyles instanceof Array)) || lineStyles === null)) {
-      return this.isLineDashed$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList$java_util_ArrayList(quickStyleVals, lineStylesExt, lineStyles);
+      return this.isLineDashedQuickStyleValsArrayList(quickStyleVals, lineStylesExt, lineStyles);
     }
     else if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && lineStylesExt === undefined && lineStyles === undefined) {
-      return this.isLineDashed$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      return this.isLineDashedQuickStyleVals(quickStyleVals);
     }
     else
       throw new Error('invalid overload');
   };
-  mxVsdxTheme.prototype.isLineDashed$com_mxgraph_io_vsdx_theme_QuickStyleVals = function (quickStyleVals) {
-    return this.isLineDashed$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList$java_util_ArrayList(quickStyleVals, this.lineStylesExt, this.lineStyles);
+  mxVsdxTheme.prototype.isLineDashedQuickStyleVals = function (quickStyleVals) {
+    return this.isLineDashedQuickStyleValsArrayList(quickStyleVals, this.lineStylesExt, this.lineStyles);
   };
   mxVsdxTheme.prototype.isConnLineDashed = function (quickStyleVals) {
-    return this.isLineDashed$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList$java_util_ArrayList(quickStyleVals, this.connLineStylesExt, this.connLineStyles);
+    return this.isLineDashedQuickStyleValsArrayList(quickStyleVals, this.connLineStylesExt, this.connLineStyles);
   };
-  mxVsdxTheme.prototype.getLineDashPattern$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList$java_util_ArrayList = function (quickStyleVals, lineStylesExt, lineStyles) {
+  mxVsdxTheme.prototype.getLineDashPatternQuickStyleValsArrayList = function (quickStyleVals, lineStylesExt, lineStyles) {
     var lineStyleExt = this.getLineStyleExt(quickStyleVals.getQuickStyleLineMatrix(), lineStylesExt);
     if (lineStyleExt != null) {
       return lineStyleExt.getLineDashPattern();
@@ -10597,19 +10590,19 @@ var mxVsdxTheme = (function () {
   };
   mxVsdxTheme.prototype.getLineDashPattern = function (quickStyleVals, lineStylesExt, lineStyles) {
     if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && ((lineStylesExt != null && (lineStylesExt instanceof Array)) || lineStylesExt === null) && ((lineStyles != null && (lineStyles instanceof Array)) || lineStyles === null)) {
-      return this.getLineDashPattern$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList$java_util_ArrayList(quickStyleVals, lineStylesExt, lineStyles);
+      return this.getLineDashPatternQuickStyleValsArrayList(quickStyleVals, lineStylesExt, lineStyles);
     }
     else if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && lineStylesExt === undefined && lineStyles === undefined) {
-      return this.getLineDashPattern$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      return this.getLineDashPatternQuickStyleVals(quickStyleVals);
     }
     else
       throw new Error('invalid overload');
   };
-  mxVsdxTheme.prototype.getLineDashPattern$com_mxgraph_io_vsdx_theme_QuickStyleVals = function (quickStyleVals) {
-    return this.getLineDashPattern$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList$java_util_ArrayList(quickStyleVals, this.lineStylesExt, this.lineStyles);
+  mxVsdxTheme.prototype.getLineDashPatternQuickStyleVals = function (quickStyleVals) {
+    return this.getLineDashPatternQuickStyleValsArrayList(quickStyleVals, this.lineStylesExt, this.lineStyles);
   };
   mxVsdxTheme.prototype.getConnLineDashPattern = function (quickStyleVals) {
-    return this.getLineDashPattern$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList$java_util_ArrayList(quickStyleVals, this.connLineStylesExt, this.connLineStyles);
+    return this.getLineDashPatternQuickStyleValsArrayList(quickStyleVals, this.connLineStylesExt, this.connLineStyles);
   };
   /*private*/
   mxVsdxTheme.prototype.getArrowSize = function (quickStyleVals, isStart, lineStylesExt, lineStyles) {
@@ -10634,7 +10627,7 @@ var mxVsdxTheme = (function () {
   mxVsdxTheme.prototype.getConnEndSize = function (quickStyleVals) {
     return this.getArrowSize(quickStyleVals, false, this.connLineStylesExt, this.connLineStyles);
   };
-  mxVsdxTheme.prototype.getFontColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList = function (quickStyleVals, fontColors) {
+  mxVsdxTheme.prototype.getFontColorQuickStyleValsArrayList = function (quickStyleVals, fontColors) {
     this.processTheme();
     var fontColorStyle = quickStyleVals.getQuickStyleFontColor();
     var fontColor = null;
@@ -10666,16 +10659,16 @@ var mxVsdxTheme = (function () {
     }
     var txtColor;
     if (fontColor != null) {
-      txtColor = fontColor.getColor$int$com_mxgraph_io_vsdx_mxVsdxTheme(fontColorStyle, this);
+      txtColor = fontColor.getColorIntVsdxTheme(fontColorStyle, this);
     }
     else {
       txtColor = this.getStyleColor(fontColorStyle);
     }
     var styleVariation = quickStyleVals.getQuickStyleVariation();
     if ((styleVariation & 2) > 0) {
-      var fillColor = this.getFillColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      var fillColor = this.getFillColorQuickStyleVals(quickStyleVals);
       var fillHSLClr = fillColor.toHsl();
-      var lineClr = this.getLineColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      var lineClr = this.getLineColorQuickStyleVals(quickStyleVals);
       var lineHSLClr = lineClr.toHsl();
       if (fillHSLClr.getLum() < lineHSLClr.getLum()) {
         txtColor = fillColor;
@@ -10688,19 +10681,19 @@ var mxVsdxTheme = (function () {
   };
   mxVsdxTheme.prototype.getFontColor = function (quickStyleVals, fontColors) {
     if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && ((fontColors != null && (fontColors instanceof Array)) || fontColors === null)) {
-      return this.getFontColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, fontColors);
+      return this.getFontColorQuickStyleValsArrayList(quickStyleVals, fontColors);
     }
     else if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && fontColors === undefined) {
-      return this.getFontColor$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      return this.getFontColorQuickStyleVals(quickStyleVals);
     }
     else
       throw new Error('invalid overload');
   };
-  mxVsdxTheme.prototype.getFontColor$com_mxgraph_io_vsdx_theme_QuickStyleVals = function (quickStyleVals) {
-    return this.getFontColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, this.fontColors);
+  mxVsdxTheme.prototype.getFontColorQuickStyleVals = function (quickStyleVals) {
+    return this.getFontColorQuickStyleValsArrayList(quickStyleVals, this.fontColors);
   };
   mxVsdxTheme.prototype.getConnFontColor = function (quickStyleVals) {
-    return this.getFontColor$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, this.connFontColors);
+    return this.getFontColorQuickStyleValsArrayList(quickStyleVals, this.connFontColors);
   };
   /*private*/
   mxVsdxTheme.prototype.getArrowType = function (quickStyleVals, isStart, lineStylesExt, lineStyles) {
@@ -10719,27 +10712,27 @@ var mxVsdxTheme = (function () {
   mxVsdxTheme.prototype.getConnEdgeMarker = function (isStart, quickStyleVals) {
     return this.getArrowType(quickStyleVals, isStart, this.connLineStylesExt, this.connLineStyles);
   };
-  mxVsdxTheme.prototype.getLineWidth$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList = function (quickStyleVals, lineStyles) {
+  mxVsdxTheme.prototype.getLineWidthQuickStyleValsLineStyles = function (quickStyleVals, lineStyles) {
     var lineStyle = this.getLineStyle(quickStyleVals.getQuickStyleLineMatrix(), lineStyles);
     return lineStyle != null ? lineStyle.getLineWidth() : 0;
   };
   mxVsdxTheme.prototype.getLineWidth = function (quickStyleVals, lineStyles) {
     if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && ((lineStyles != null && (lineStyles instanceof Array)) || lineStyles === null)) {
-      return this.getLineWidth$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, lineStyles);
+      return this.getLineWidthQuickStyleValsLineStyles(quickStyleVals, lineStyles);
     }
     else if (((quickStyleVals != null && quickStyleVals instanceof mxTheme.QuickStyleVals) || quickStyleVals === null) && lineStyles === undefined) {
-      return this.getLineWidth$com_mxgraph_io_vsdx_theme_QuickStyleVals(quickStyleVals);
+      return this.getLineWidthQuickStyleVals(quickStyleVals);
     }
     else
       throw new Error('invalid overload');
   };
-  mxVsdxTheme.prototype.getLineWidth$com_mxgraph_io_vsdx_theme_QuickStyleVals = function (quickStyleVals) {
-    return this.getLineWidth$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, this.lineStyles);
+  mxVsdxTheme.prototype.getLineWidthQuickStyleVals = function (quickStyleVals) {
+    return this.getLineWidthQuickStyleValsLineStyles(quickStyleVals, this.lineStyles);
   };
   mxVsdxTheme.prototype.getConnLineWidth = function (quickStyleVals) {
-    return this.getLineWidth$com_mxgraph_io_vsdx_theme_QuickStyleVals$java_util_ArrayList(quickStyleVals, this.connLineStyles);
+    return this.getLineWidthQuickStyleValsLineStyles(quickStyleVals, this.connLineStyles);
   };
-  mxVsdxTheme.__static_initialized = false;
+  mxVsdxTheme.initialized = false;
   return mxVsdxTheme;
 }());
 
@@ -11237,11 +11230,11 @@ var mxVsdxPage = (function () {
       return m[k] ? m[k] : null;
     })(this.cellElements, "PageWidth");
     if (height != null) {
-      pageH = parseFloat(height.getAttribute("V")) * mxVsdxUtils.conversionFactor_$LI$();
+      pageH = parseFloat(height.getAttribute("V")) * mxVsdxUtils.getConversionFactor();
       pageH = Math.round(pageH * 100.0) / 100.0;
     }
     if (width != null) {
-      pageW = parseFloat(width.getAttribute("V")) * mxVsdxUtils.conversionFactor_$LI$();
+      pageW = parseFloat(width.getAttribute("V")) * mxVsdxUtils.getConversionFactor();
       pageW = Math.round(pageW * 100.0) / 100.0;
     }
     return new mxPoint(pageW, pageH);
@@ -11255,7 +11248,7 @@ var mxVsdxPage = (function () {
       return m[k] ? m[k] : null;
     })(this.cellElements, "DrawingScale");
     if (scale != null) {
-      return parseFloat(scale.getAttribute("V")) * mxVsdxUtils.conversionFactor_$LI$();
+      return parseFloat(scale.getAttribute("V")) * mxVsdxUtils.getConversionFactor();
     }
     return 1;
   };
@@ -11268,7 +11261,7 @@ var mxVsdxPage = (function () {
       return m[k] ? m[k] : null;
     })(this.cellElements, "PageScale");
     if (scale != null) {
-      return parseFloat(scale.getAttribute("V")) * mxVsdxUtils.conversionFactor_$LI$();
+      return parseFloat(scale.getAttribute("V")) * mxVsdxUtils.getConversionFactor();
     }
     return 1;
   };
@@ -11415,7 +11408,7 @@ var mxVsdxGeometryList = (function () {
           });
         else
           l.sort(c);
-      })(this.geomList, new mxVsdxGeometryList.mxVsdxGeometryList$0(this));
+      })(this.geomList, new mxVsdxGeometryList.mxVsdxGeometryListNone(this));
       this.sortNeeded = false;
     }
   };
@@ -11507,9 +11500,9 @@ var mxVsdxGeometryList = (function () {
                   })(360 - rotation);
                   this.rotatedPoint(p, Math.cos(rotation), Math.sin(rotation));
                 }
-                x = (p.x - offsetX) * mxVsdxUtils.conversionFactor_$LI$();
+                x = (p.x - offsetX) * mxVsdxUtils.getConversionFactor();
                 x += startPoint.x;
-                y = ((p.y - offsetY) * mxVsdxUtils.conversionFactor_$LI$()) * -1;
+                y = ((p.y - offsetY) * mxVsdxUtils.getConversionFactor()) * -1;
                 y += startPoint.y;
                 x = Math.round(x * 100.0) / 100.0;
                 y = Math.round(y * 100.0) / 100.0;
@@ -11636,12 +11629,28 @@ var mxVsdxGeometryList = (function () {
   };
   return mxVsdxGeometryList;
 }());
+mxVsdxGeometryList.mxVsdxGeometryListNone = (function () {
+  function mxVsdxGeometryListNone(__parent) {
+    this.__parent = __parent;
+  }
+
+  /**
+   *
+   * @param {mxVsGeometry.Row} r1
+   * @param {mxVsGeometry.Row} r2
+   * @return {number}
+   */
+  mxVsdxGeometryListNone.prototype.compare = function (r1, r2) {
+    return r1.getIndex() - r2.getIndex();
+  };
+  return mxVsdxGeometryListNone;
+}());
 
 var Constants = (function () {
   function Constants() {
   }
 
-  Constants.MAX_AREA_$LI$ = function () {
+  Constants.getMaxArea = function () {
     if (Constants.MAX_AREA == null)
       Constants.MAX_AREA = 10000 * 10000;
     return Constants.MAX_AREA;
@@ -11823,7 +11832,7 @@ var mxVsdxGeometry = (function () {
       this.rows = null;
       this.index = 0;
       (function () {
-        _this.index = _this.getIndex$org_w3c_dom_Element(elem);
+        _this.index = _this.getIndexElem(elem);
         if (parentGeo != null && _this.index < parentGeo.length) {
           _this.inheritGeo(/* get */ parentGeo[_this.index]);
         }
@@ -11841,7 +11850,7 @@ var mxVsdxGeometry = (function () {
       this.rows = null;
       this.index = 0;
       (function () {
-        _this.index = _this.getIndex$org_w3c_dom_Element(elem);
+        _this.index = _this.getIndexElem(elem);
         _this.processGeoElem(elem);
       })();
     }
@@ -11849,7 +11858,7 @@ var mxVsdxGeometry = (function () {
       throw new Error('invalid overload');
   }
 
-  mxVsdxGeometry.prototype.getIndex$org_w3c_dom_Element = function (elem) {
+  mxVsdxGeometry.prototype.getIndexElem = function (elem) {
     try {
       return parseInt(elem.getAttribute("IX"));
     }
@@ -11860,10 +11869,10 @@ var mxVsdxGeometry = (function () {
   };
   mxVsdxGeometry.prototype.getIndex = function (elem) {
     if (((elem != null && (elem.nodeType == 1)) || elem === null)) {
-      return this.getIndex$org_w3c_dom_Element(elem);
+      return this.getIndexElem(elem);
     }
     else if (elem === undefined) {
-      return this.getIndex$();
+      return this.getIndexNone();
     }
     else
       throw new Error('invalid overload');
@@ -11965,7 +11974,7 @@ var mxVsdxGeometry = (function () {
           });
         else
           l.sort(c);
-      })(this.rows, new mxVsdxGeometry.mxVsdxGeometry$0(this));
+      })(this.rows, new mxVsdxGeometry.mxVsdxGeometryNone(this));
     }
   };
   /*private*/
@@ -11981,7 +11990,7 @@ var mxVsdxGeometry = (function () {
       return l1.push.apply(l1, l2);
     })(this.rows, parent.rows);
   };
-  mxVsdxGeometry.prototype.getIndex$ = function () {
+  mxVsdxGeometry.prototype.getIndexNone = function () {
     return this.index;
   };
   mxVsdxGeometry.prototype.isNoFill = function () {
@@ -12028,8 +12037,8 @@ var mxVsdxGeometry = (function () {
   return mxVsdxGeometry;
 }());
 
-mxVsdxGeometry.mxVsdxGeometry$0 = (function () {
-  function mxVsdxGeometry$0(__parent) {
+mxVsdxGeometry.mxVsdxGeometryNone = (function () {
+  function mxVsdxGeometryNone(__parent) {
     this.__parent = __parent;
   }
 
@@ -12039,10 +12048,10 @@ mxVsdxGeometry.mxVsdxGeometry$0 = (function () {
    * @param {mxVsGeometry.Row} r2
    * @return {number}
    */
-  mxVsdxGeometry$0.prototype.compare = function (r1, r2) {
+  mxVsdxGeometryNone.prototype.compare = function (r1, r2) {
     return r1.getIndex() - r2.getIndex();
   };
-  return mxVsdxGeometry$0;
+  return mxVsdxGeometryNone;
 }());
 
 var mxVsGeometry = {
@@ -12245,10 +12254,10 @@ mxVsGeometry.ArcTo = (function (_super) {
       var w = shape.getWidth();
       var x0 = Math.floor(Math.round(shape.getLastX() * w) / 100);
       var y0 = Math.floor(Math.round(shape.getLastY() * h) / 100);
-      var x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      var y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      var x = this.x * mxVsdxUtils.getConversionFactor();
+      var y = this.y * mxVsdxUtils.getConversionFactor();
       y = h - y;
-      var a = this.a * mxVsdxUtils.conversionFactor_$LI$();
+      var a = this.a * mxVsdxUtils.getConversionFactor();
       var dx = Math.abs(x - x0);
       var dy = Math.abs(y - y0);
       var rx = (a * 0.5) + (dx * dx + dy * dy) / (8.0 * a);
@@ -12313,14 +12322,14 @@ mxVsGeometry.Ellipse = (function (_super) {
     if (this.x != null && this.y != null && this.a != null && this.b != null && this.c != null && this.d != null) {
       var h = shape.getHeight();
       var w = shape.getWidth();
-      var x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      var y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      var x = this.x * mxVsdxUtils.getConversionFactor();
+      var y = this.y * mxVsdxUtils.getConversionFactor();
       y = h - y;
-      var a = this.a * mxVsdxUtils.conversionFactor_$LI$();
-      var b = this.b * mxVsdxUtils.conversionFactor_$LI$();
+      var a = this.a * mxVsdxUtils.getConversionFactor();
+      var b = this.b * mxVsdxUtils.getConversionFactor();
       b = h - b;
-      var c = this.c * mxVsdxUtils.conversionFactor_$LI$();
-      var d = this.d * mxVsdxUtils.conversionFactor_$LI$();
+      var c = this.c * mxVsdxUtils.getConversionFactor();
+      var d = this.d * mxVsdxUtils.getConversionFactor();
       d = h - d;
       var dx1 = Math.abs(a - x);
       var dy1 = Math.abs(b - y);
@@ -12364,11 +12373,11 @@ mxVsGeometry.EllipticalArcTo = (function (_super) {
     if (this.x != null && this.y != null && this.a != null && this.b != null && this.c != null && this.d != null) {
       var h = shape.getHeight();
       var w = shape.getWidth();
-      var x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      var y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      var x = this.x * mxVsdxUtils.getConversionFactor();
+      var y = this.y * mxVsdxUtils.getConversionFactor();
       y = h - y;
-      var a = this.a * mxVsdxUtils.conversionFactor_$LI$();
-      var b = this.b * mxVsdxUtils.conversionFactor_$LI$();
+      var a = this.a * mxVsdxUtils.getConversionFactor();
+      var b = this.b * mxVsdxUtils.getConversionFactor();
       var c = this.c;
       var d = this.d;
       x = x * 100.0 / w;
@@ -12484,8 +12493,8 @@ mxVsGeometry.RelEllipticalArcTo = (function (_super) {
    */
   RelEllipticalArcTo.prototype.handle = function (p, shape) {
     if (this.x != null && this.y != null && this.a != null && this.b != null && this.c != null && this.d != null) {
-      var h = shape.getHeight() / mxVsdxUtils.conversionFactor_$LI$();
-      var w = shape.getWidth() / mxVsdxUtils.conversionFactor_$LI$();
+      var h = shape.getHeight() / mxVsdxUtils.getConversionFactor();
+      var w = shape.getWidth() / mxVsdxUtils.getConversionFactor();
       this.x *= w;
       this.y *= h;
       this.a *= w;
@@ -12533,8 +12542,8 @@ mxVsGeometry.LineTo = (function (_super) {
     var h = shape.getHeight();
     var w = shape.getWidth();
     if (this.x != null && this.y != null) {
-      x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      x = this.x * mxVsdxUtils.getConversionFactor();
+      y = this.y * mxVsdxUtils.getConversionFactor();
     }
     x = x * 100.0 / w;
     y = y * 100.0 / h;
@@ -12567,8 +12576,8 @@ mxVsGeometry.MoveTo = (function (_super) {
     var h = shape.getHeight();
     var w = shape.getWidth();
     if (this.x != null && this.y != null) {
-      x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      x = this.x * mxVsdxUtils.getConversionFactor();
+      y = this.y * mxVsdxUtils.getConversionFactor();
     }
     x = x * 100.0 / w;
     y = y * 100.0 / h;
@@ -12607,8 +12616,8 @@ mxVsGeometry.NURBSTo = (function (_super) {
     if (this.x != null && this.y != null && this.formulaE != null) {
       var h = shape.getHeight();
       var w = shape.getWidth();
-      var x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      var y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      var x = this.x * mxVsdxUtils.getConversionFactor();
+      var y = this.y * mxVsdxUtils.getConversionFactor();
       var eValue = this.formulaE.split("NURBS(").join("");
       eValue = eValue.split(")").join("");
       var nurbs = new NURBSTo.Nurbs(this, eValue, w, h);
@@ -12787,8 +12796,8 @@ mxVsGeometry.PolylineTo = (function (_super) {
     if (this.x != null && this.y != null && this.formulaA != null) {
       var h = shape.getHeight();
       var w = shape.getWidth();
-      var x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      var y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      var x = this.x * mxVsdxUtils.getConversionFactor();
+      var y = this.y * mxVsdxUtils.getConversionFactor();
       x = x * 100.0 / w;
       y = y * 100.0 / h;
       y = 100 - y;
@@ -12814,8 +12823,8 @@ mxVsGeometry.PolylineTo = (function (_super) {
       var currX = 0;
       var currY = 0;
       while ((polyEntriesList.length > 0)) {
-        currX = parseFloat(/* remove */ polyEntriesList.splice(0, 1)) * mxVsdxUtils.conversionFactor_$LI$();
-        currY = parseFloat(/* remove */ polyEntriesList.splice(0, 1)) * mxVsdxUtils.conversionFactor_$LI$();
+        currX = parseFloat(/* remove */ polyEntriesList.splice(0, 1)) * mxVsdxUtils.getConversionFactor();
+        currY = parseFloat(/* remove */ polyEntriesList.splice(0, 1)) * mxVsdxUtils.getConversionFactor();
         if (xRel === 1) {
           currX = currX * 100.0 / w;
         }
@@ -12987,8 +12996,8 @@ mxVsGeometry.SplineKnot = (function (_super) {
    */
   SplineKnot.prototype.handle = function (p, shape) {
     if (this.x != null && this.y != null && this.a != null) {
-      var x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      var y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      var x = this.x * mxVsdxUtils.getConversionFactor();
+      var y = this.y * mxVsdxUtils.getConversionFactor();
       var a = this.a;
       var knot = a;
       y = 100 - y;
@@ -13023,8 +13032,8 @@ mxVsGeometry.SplineStart = (function (_super) {
     if (this.x != null && this.y != null && this.a != null && this.b != null && this.c != null && this.d != null) {
       var h = shape.getHeight();
       var w = shape.getWidth();
-      var x = this.x * mxVsdxUtils.conversionFactor_$LI$();
-      var y = this.y * mxVsdxUtils.conversionFactor_$LI$();
+      var x = this.x * mxVsdxUtils.getConversionFactor();
+      var y = this.y * mxVsdxUtils.getConversionFactor();
       var c = this.c;
       var d = (this.d | 0);
       var lastKnot = c;
@@ -13045,30 +13054,29 @@ mxVsGeometry.SplineStart = (function (_super) {
   return SplineStart;
 }(mxVsGeometry.Row));
 
-mxBase64.IA_$LI$();
-mxBase64.CA_$LI$();
-mxBase64.__static_initialize();
-VsdxShape.__com_mxgraph_io_vsdx_VsdxShape_LOGGER_$LI$();
-VsdxShape.arrowTypes_$LI$();
-VsdxShape.arrowSizes_$LI$();
-VsdxShape.OFFSET_ARRAY_$LI$();
-VsdxShape.__static_initialize();
-Shape.UNICODE_LINE_SEP_$LI$();
-Style.lineDashPatterns_$LI$();
-Style.styleTypes_$LI$();
-Style.__static_initialize();
-Constants.MAX_AREA_$LI$();
-mxTheme.Color.NONE_$LI$();
-mxVsdxUtils.conversionFactor_$LI$();
-mxVsdxTheme.colorIds_$LI$();
-mxVsdxTheme.themesIds_$LI$();
-mxVsdxTheme.__static_initialize();
-mxVsdxConstants.MY_SET_$LI$();
-mxVsdxConstants.SET_VALUES_$LI$();
-mxPropertiesManager.defaultColors_$LI$();
-mxPropertiesManager.__static_initialize();
-mxVsdxCodec.vsdxPlaceholder_$LI$();
-mxVsdxCodec.parsererrorNS_$LI$();
+mxBase64.getIA();
+mxBase64.getCA();
+mxBase64.initialize();
+VsdxShape.getArrowTypes();
+VsdxShape.getArrowSizes();
+VsdxShape.getOffsetArray();
+VsdxShape.initialize();
+Shape.getUnicodeLineSep();
+Style.getLineDashPatterns();
+Style.getStyleTypes();
+Style.initialize();
+Constants.getMaxArea();
+mxTheme.Color.getNone();
+mxVsdxUtils.getConversionFactor();
+mxVsdxTheme.getColorIds();
+mxVsdxTheme.getThemesIds();
+mxVsdxTheme.initialize();
+mxVsdxConstants.getMySet();
+mxVsdxConstants.getSetValues();
+mxPropertiesManager.getDefaultColors();
+mxPropertiesManager.initialize();
+mxVsdxCodec.getVsdxPlaceholder();
+mxVsdxCodec.getParsererrorNS();
 
 module.exports = function doImportVisio(file, graph, done, onerror) {
   if (file.name != null && /(\.vssx)($|\?)/i.test(file.name)) {
